@@ -23,7 +23,7 @@ class BoringAvatarUtilities
 
     public function getDigit(int $number, int $ntn): int
     {
-        return (int) floor(($number / pow(10, $ntn)) % 10);
+        return (int) floor((int) ($number / (10 ** $ntn)) % 10);
     }
 
     public function getBoolean(int $number, int $ntn): bool
