@@ -1,29 +1,3 @@
-@php
-    $numFromName = $component->hash($name);
-    $range = count($colors);
-    $COLORS = 5;
-    $SIZE = 90;
-
-    $colorsShuffle = [];
-    for ($i = 0; $i < $COLORS; $i++) {
-        $colorsShuffle[] = $component->randomColor((int) ($numFromName + $i), $colors, $range);
-    }
-
-    $colorsList = [
-        $colorsShuffle[0],
-        $colorsShuffle[1],
-        $colorsShuffle[1],
-        $colorsShuffle[2],
-        $colorsShuffle[3],
-        $colorsShuffle[3],
-        $colorsShuffle[0],
-        $colorsShuffle[4],
-        $colorsShuffle[3],
-    ];
-
-    $maskId = $variant . '-mask-' . preg_replace('/[^a-zA-Z0-9]/', '', $name) . '-' . $numFromName;
-@endphp
-
 <svg viewBox="0 0 {{ $SIZE }} {{ $SIZE }}" fill="none" role="img" xmlns="http://www.w3.org/2000/svg" {{ $attributes->merge(['width' => $size, 'height' => $size]) }}>
     @if ($title)
         <title>{{ $name }}</title>

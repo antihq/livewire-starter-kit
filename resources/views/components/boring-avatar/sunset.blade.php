@@ -1,20 +1,3 @@
-@php
-    $numFromName = $component->hash($name);
-    $range = count($colors);
-    $ELEMENTS = 4;
-    $SIZE = 80;
-
-    $colorsList = [];
-    for ($i = 0; $i < $ELEMENTS; $i++) {
-        $colorsList[] = $component->randomColor((int) ($numFromName + $i), $colors, $range);
-    }
-
-    $nameWithoutSpace = preg_replace('/\s/', '', $name);
-    $gradient0Id = 'gradient-paint0-linear-' . $nameWithoutSpace;
-    $gradient1Id = 'gradient-paint1-linear-' . $nameWithoutSpace;
-    $maskId = $variant . '-mask-' . preg_replace('/[^a-zA-Z0-9]/', '', $name) . '-' . $numFromName;
-@endphp
-
 <svg viewBox="0 0 {{ $SIZE }} {{ $SIZE }}" fill="none" role="img" xmlns="http://www.w3.org/2000/svg" {{ $attributes->merge(['width' => $size, 'height' => $size]) }}>
     @if ($title)
         <title>{{ $name }}</title>

@@ -1,21 +1,3 @@
-@php
-    $numFromName = $component->hash($name);
-    $range = count($colors);
-    $maskId = $variant . '-mask-' . preg_replace('/[^a-zA-Z0-9]/', '', $name) . '-' . $numFromName;
-    $SIZE = 80;
-
-    $elementsProperties = [];
-    for ($i = 0; $i < 4; $i++) {
-        $elementsProperties[] = [
-            'color' => $component->randomColor((int) ($numFromName + $i), $colors, $range),
-            'translateX' => $component->unit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 2 - ($i + 17)), 1),
-            'translateY' => $component->unit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 2 - ($i + 17)), 2),
-            'rotate' => $component->unit((int) ($numFromName * ($i + 1)), 360),
-            'isSquare' => $component->boolean($numFromName, 2),
-        ];
-    }
-@endphp
-
 <svg viewBox="0 0 {{ $SIZE }} {{ $SIZE }}" fill="none" role="img" xmlns="http://www.w3.org/2000/svg" {{ $attributes->merge(['width' => $size, 'height' => $size]) }}>
     @if ($title)
         <title>{{ $name }}</title>

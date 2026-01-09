@@ -1,24 +1,3 @@
-@php
-    $numFromName = $component->hash($name);
-    $range = count($colors);
-    $ELEMENTS = 3;
-    $SIZE = 80;
-
-    $elementsProperties = [];
-    for ($i = 0; $i < $ELEMENTS; $i++) {
-        $elementsProperties[] = [
-            'color' => $component->randomColor((int) ($numFromName + $i), $colors, $range),
-            'translateX' => $component->unit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 10), 1),
-            'translateY' => $component->unit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 10), 2),
-            'scale' => 1.2 + $component->unit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 20)) / 10,
-            'rotate' => $component->unit((int) ($numFromName * ($i + 1)), 360, 1),
-        ];
-    }
-
-    $filterId = 'marble-filter-' . preg_replace('/[^a-zA-Z0-9]/', '', $name) . '-' . $numFromName;
-    $maskId = $variant . '-mask-' . preg_replace('/[^a-zA-Z0-9]/', '', $name) . '-' . $numFromName;
-@endphp
-
 <svg viewBox="0 0 {{ $SIZE }} {{ $SIZE }}" fill="none" role="img" xmlns="http://www.w3.org/2000/svg" {{ $attributes->merge(['width' => $size, 'height' => $size]) }}>
     @if ($title)
         <title>{{ $name }}</title>
