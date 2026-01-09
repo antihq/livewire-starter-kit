@@ -12,12 +12,12 @@
     $COLORS = 5;
     $SIZE = 90;
 
-    $numFromName = $utilities->hashCode($name);
+    $numFromName = $utilities->hash($name);
     $range = count($colors);
 
     $colorsShuffle = [];
     for ($i = 0; $i < $COLORS; $i++) {
-        $colorsShuffle[] = $utilities->getRandomColor($numFromName + $i, $colors, $range);
+        $colorsShuffle[] = $utilities->randomColor($numFromName + $i, $colors, $range);
     }
 
     $colorsList = [

@@ -11,32 +11,32 @@
 
     $SIZE = 36;
 
-    $numFromName = $utilities->hashCode($name);
+    $numFromName = $utilities->hash($name);
     $range = count($colors);
 
-    $wrapperColor = $utilities->getRandomColor($numFromName, $colors, $range);
+    $wrapperColor = $utilities->randomColor($numFromName, $colors, $range);
 
-    $preTranslateX = $utilities->getUnit($numFromName, 10, 1);
+    $preTranslateX = $utilities->unit($numFromName, 10, 1);
     $wrapperTranslateX = $preTranslateX < 5 ? $preTranslateX + $SIZE / 9 : $preTranslateX;
 
-    $preTranslateY = $utilities->getUnit($numFromName, 10, 2);
+    $preTranslateY = $utilities->unit($numFromName, 10, 2);
     $wrapperTranslateY = $preTranslateY < 5 ? $preTranslateY + $SIZE / 9 : $preTranslateY;
 
     $data = [
         'wrapperColor' => $wrapperColor,
-        'faceColor' => $utilities->getContrast($wrapperColor),
-        'backgroundColor' => $utilities->getRandomColor($numFromName + 13, $colors, $range),
+        'faceColor' => $utilities->contrast($wrapperColor),
+        'backgroundColor' => $utilities->randomColor($numFromName + 13, $colors, $range),
         'wrapperTranslateX' => $wrapperTranslateX,
         'wrapperTranslateY' => $wrapperTranslateY,
-        'wrapperRotate' => $utilities->getUnit($numFromName, 360),
-        'wrapperScale' => 1 + $utilities->getUnit($numFromName, $SIZE / 12) / 10,
-        'isMouthOpen' => $utilities->getBoolean($numFromName, 2),
-        'isCircle' => $utilities->getBoolean($numFromName, 1),
-        'eyeSpread' => $utilities->getUnit($numFromName, 5),
-        'mouthSpread' => $utilities->getUnit($numFromName, 3),
-        'faceRotate' => $utilities->getUnit($numFromName, 10, 3),
-        'faceTranslateX' => $wrapperTranslateX > $SIZE / 6 ? $wrapperTranslateX / 2 : $utilities->getUnit($numFromName, 8, 1),
-        'faceTranslateY' => $wrapperTranslateY > $SIZE / 6 ? $wrapperTranslateY / 2 : $utilities->getUnit($numFromName, 7, 2),
+        'wrapperRotate' => $utilities->unit($numFromName, 360),
+        'wrapperScale' => 1 + $utilities->unit($numFromName, $SIZE / 12) / 10,
+        'isMouthOpen' => $utilities->boolean($numFromName, 2),
+        'isCircle' => $utilities->boolean($numFromName, 1),
+        'eyeSpread' => $utilities->unit($numFromName, 5),
+        'mouthSpread' => $utilities->unit($numFromName, 3),
+        'faceRotate' => $utilities->unit($numFromName, 10, 3),
+        'faceTranslateX' => $wrapperTranslateX > $SIZE / 6 ? $wrapperTranslateX / 2 : $utilities->unit($numFromName, 8, 1),
+        'faceTranslateY' => $wrapperTranslateY > $SIZE / 6 ? $wrapperTranslateY / 2 : $utilities->unit($numFromName, 7, 2),
     ];
 
     $maskId = 'beam-mask-' . preg_replace('/[^a-zA-Z0-9]/', '', $name) . '-' . $numFromName;

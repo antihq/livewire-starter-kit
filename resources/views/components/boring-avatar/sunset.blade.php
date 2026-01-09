@@ -12,12 +12,12 @@
     $ELEMENTS = 4;
     $SIZE = 80;
 
-    $numFromName = $utilities->hashCode($name);
+    $numFromName = $utilities->hash($name);
     $range = count($colors);
 
     $colorsList = [];
     for ($i = 0; $i < $ELEMENTS; $i++) {
-        $colorsList[] = $utilities->getRandomColor($numFromName + $i, $colors, $range);
+        $colorsList[] = $utilities->randomColor($numFromName + $i, $colors, $range);
     }
 
     $nameWithoutSpace = preg_replace('/\s/', '', $name);

@@ -12,12 +12,12 @@
     $ELEMENTS = 64;
     $SIZE = 80;
 
-    $numFromName = $utilities->hashCode($name);
+    $numFromName = $utilities->hash($name);
     $range = count($colors);
 
     $pixelColors = [];
     for ($i = 0; $i < $ELEMENTS; $i++) {
-        $pixelColors[] = $utilities->getRandomColor($numFromName % ($i + 1), $colors, $range);
+        $pixelColors[] = $utilities->randomColor($numFromName % ($i + 1), $colors, $range);
     }
 
     $maskId = 'pixel-mask-' . preg_replace('/[^a-zA-Z0-9]/', '', $name) . '-' . $numFromName;

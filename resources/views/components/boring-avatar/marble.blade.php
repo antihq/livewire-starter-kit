@@ -12,17 +12,17 @@
     $ELEMENTS = 3;
     $SIZE = 80;
 
-    $numFromName = $utilities->hashCode($name);
+    $numFromName = $utilities->hash($name);
     $range = count($colors);
 
     $elementsProperties = [];
     for ($i = 0; $i < $ELEMENTS; $i++) {
         $elementsProperties[] = [
-            'color' => $utilities->getRandomColor($numFromName + $i, $colors, $range),
-            'translateX' => $utilities->getUnit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 10), 1),
-            'translateY' => $utilities->getUnit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 10), 2),
-            'scale' => 1.2 + $utilities->getUnit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 20)) / 10,
-            'rotate' => $utilities->getUnit((int) ($numFromName * ($i + 1)), 360, 1),
+            'color' => $utilities->randomColor($numFromName + $i, $colors, $range),
+            'translateX' => $utilities->unit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 10), 1),
+            'translateY' => $utilities->unit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 10), 2),
+            'scale' => 1.2 + $utilities->unit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 20)) / 10,
+            'rotate' => $utilities->unit((int) ($numFromName * ($i + 1)), 360, 1),
         ];
     }
 
