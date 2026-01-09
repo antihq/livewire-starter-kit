@@ -13,6 +13,14 @@ it('generates deterministics hash for same name', function () {
         ->and($hash1)->not->toBe($hash3);
 });
 
+it('generates integer hash for long names', function () {
+    $utilities = new BoringAvatarUtilities;
+
+    $hash = $utilities->hashCode('Oliver Servin');
+
+    expect($hash)->toBeInt();
+});
+
 it('generates different hashes for different names', function () {
     $utilities = new BoringAvatarUtilities;
 

@@ -13,7 +13,7 @@ class BoringAvatarUtilities
             $hash = $hash & $hash;
         }
 
-        return abs($hash);
+        return (int) abs($hash);
     }
 
     public function getModulus(int $num, int $max): int
