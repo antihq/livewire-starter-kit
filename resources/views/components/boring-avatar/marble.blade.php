@@ -14,16 +14,14 @@
             filter="url(#{{ $filterId }})"
             d="M32.414 59.35L50.376 70.5H72.5v-71H33.28L26.5 13.38l19.057 27.08L32.414 59.35z"
             fill="{{ $elementsProperties[1]['color'] }}"
-            transform="translate({{ $elementsProperties[1]['translateX'] }} {{ $elementsProperties[1]['translateY'] }}) rotate({{ $elementsProperties[1]['rotate'] }} {{ $SIZE / 2 }})"
-            rx="{{ $square ? 0 : $SIZE * 2 }}" />
+            transform="translate({{ $elementsProperties[1]['translateX'] }} {{ $elementsProperties[1]['translateY'] }}) rotate({{ $elementsProperties[1]['rotate'] }} {{ $SIZE / 2 }} {{ $SIZE / 2 }})" />
 
         <path
             filter="url(#{{ $filterId }})"
             style="mix-blend-mode: overlay"
             d="M22.216 24L0 46.75l14.108 38.129L78.86l-3.081 59.27.08L32.414 59.35 27.395 0 12.972 20.186-23.35 27.395L22.215 24z"
             fill="{{ $elementsProperties[2]['color'] }}"
-            transform="translate({{ $elementsProperties[2]['translateX'] }} {{ $elementsProperties[2]['translateY'] }}) rotate({{ $elementsProperties[2]['rotate'] }} {{ $SIZE / 2 }})"
-            rx="{{ $square ? 0 : $SIZE * 2 }}" />
+            transform="translate({{ $elementsProperties[2]['translateX'] }} {{ $elementsProperties[2]['translateY'] }}) rotate({{ $elementsProperties[2]['rotate'] }} {{ $SIZE / 2 }} {{ $SIZE / 2 }}) scale({{ $elementsProperties[2]['scale'] }})" />
     </g>
 
     <defs>

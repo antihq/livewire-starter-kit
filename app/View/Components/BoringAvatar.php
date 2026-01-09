@@ -29,7 +29,7 @@ class BoringAvatar extends Component
 
     public const ELEMENTS_SUNSET = 4;
 
-    public const DEFAULT_COLORS = ['#E2E8F0', '#CBD5E1', '#94A3B8', '#64748B', '#475569', '#334155', '#1E293B', '#0F172A'];
+    public const DEFAULT_COLORS = ['#0a0310', '#49007e', '#ff005b', '#ff7d10', '#ffb238'];
 
     public string $variant;
 
@@ -314,7 +314,12 @@ class BoringAvatar extends Component
 
     public function hash(string $str): int
     {
-        return (int) preg_replace('/[^0-9]/', '', md5($str));
+        $hash = 5381;
+        $len = strlen($str); // Calculate length once
+        for ($i = 0; $i < $len; $i++) {
+            $hash = (($hash << 5) + $hash) + ord($str[$i]); // Core hash
+        }
+        return (int) $hash;
     }
 
     public function contrast(string $color): string

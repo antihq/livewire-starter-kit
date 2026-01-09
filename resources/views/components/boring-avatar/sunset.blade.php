@@ -10,17 +10,17 @@
     <g mask="url(#{{ $maskId }})">
         <rect width="{{ $SIZE }}" height="{{ $SIZE }}" fill="{{ $colorsList[0] }}" />
         <path fill="url(#{{ $gradient0Id }})" d="M0 0h80v40H0z" />
-        <path fill="url(#{{ $gradient1Id }})" d="M0 40h80v40H0z" fill="{{ $colorsList[1] }}" />
+        <path fill="url(#{{ $gradient1Id }})" d="M0 40h80v40H0z" />
     </g>
 
     <defs>
-        <linearGradient id="{{ $gradient0Id }}" x1="{{ $SIZE / 2 }}" y1="{{ $SIZE / 2 }}" x2="{{ $SIZE / 2 }}" gradientUnits="userSpaceOnUse">
+        <linearGradient id="{{ $gradient0Id }}" x1="{{ $SIZE / 2 }}" y1="0" x2="{{ $SIZE / 2 }}" y2="{{ $SIZE / 2 }}" gradientUnits="userSpaceOnUse">
             <stop stop-color="{{ $colorsList[0] }}" />
             <stop offset="1" stop-color="{{ $colorsList[1] }}" />
         </linearGradient>
-        <linearGradient id="{{ $gradient1Id }}" x1="{{ $SIZE / 2 }}" y1="{{ $SIZE / 2 }}" gradientUnits="userSpaceOnUse">
-            <stop stop-color="{{ $colorsList[0] }}" />
-            <stop offset="1" stop-color="{{ $colorsList[1] }}" />
+        <linearGradient id="{{ $gradient1Id }}" x1="{{ $SIZE / 2 }}" y1="{{ $SIZE / 2 }}" x2="{{ $SIZE / 2 }}" y2="{{ $SIZE }}" gradientUnits="userSpaceOnUse">
+            <stop stop-color="{{ $colorsList[2] }}" />
+            <stop offset="1" stop-color="{{ $colorsList[3] }}" />
         </linearGradient>
     </defs>
 </svg>

@@ -16,7 +16,7 @@
             width="{{ $SIZE }}"
             height="{{ $elementsProperties[1]['isSquare'] ? $SIZE : $SIZE / 8 }}"
             fill="{{ $elementsProperties[1]['color'] }}"
-            transform="translate({{ $elementsProperties[1]['translateX'] }} {{ $elementsProperties[1]['translateY'] }}) rotate({{ $elementsProperties[1]['rotate'] }} {{ $SIZE / 2 }})" />
+            transform="translate({{ $elementsProperties[1]['translateX'] }} {{ $elementsProperties[1]['translateY'] }}) rotate({{ $elementsProperties[1]['rotate'] }} {{ $SIZE / 2 }} {{ $SIZE / 2 }})" />
 
         <circle
             cx="{{ $SIZE / 2 }}"
@@ -32,6 +32,6 @@
             y2="{{ $SIZE / 2 }}"
             stroke-width="2"
             stroke="{{ $elementsProperties[3]['color'] }}"
-            transform="translate({{ $elementsProperties[3]['translateX'] }} {{ $elementsProperties[3]['translateY'] }}) rotate({{ $elementsProperties[3]['rotate'] }} {{ $SIZE / 2 }})" />
+            transform="translate({{ $elementsProperties[3]['translateX'] }} {{ $elementsProperties[3]['translateY'] }}) rotate({{ $elementsProperties[3]['rotate'] }} {{ $SIZE / 2 }} {{ $SIZE / 2 }})" />
     </g>
 </svg>

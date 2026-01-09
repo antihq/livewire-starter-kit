@@ -15,11 +15,11 @@
             y="0"
             width="{{ $SIZE }}"
             height="{{ $SIZE }}"
-            transform="translate({{ $data['wrapperTranslateX'] }} {{ $data['wrapperTranslateY'] }}) rotate({{ $data['wrapperRotate'] }} {{ $SIZE / 2 }})"
+            transform="translate({{ $data['wrapperTranslateX'] }} {{ $data['wrapperTranslateY'] }}) rotate({{ $data['wrapperRotate'] }} {{ $SIZE / 2 }} {{ $SIZE / 2 }}) scale({{ $data['wrapperScale'] }})"
             fill="{{ $data['wrapperColor'] }}"
             rx="{{ $data['isCircle'] ? $SIZE : $SIZE / 6 }}" />
 
-        <g transform="translate({{ $data['faceTranslateX'] }} {{ $data['faceTranslateY'] }}) rotate({{ $data['faceRotate'] }} {{ $SIZE / 2 }})">
+        <g transform="translate({{ $data['faceTranslateX'] }} {{ $data['faceTranslateY'] }}) rotate({{ $data['faceRotate'] }} {{ $SIZE / 2 }} {{ $SIZE / 2 }})">
             @if ($data['isMouthOpen'])
                 <path
                     d="{{ $mouthPath }}"

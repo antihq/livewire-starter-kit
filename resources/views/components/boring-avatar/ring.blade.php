@@ -10,14 +10,12 @@
     <g mask="url(#{{ $maskId }})">
         <path d="M0 0h90v45H0z" fill="{{ $colorsList[0] }}" />
         <path d="M0 45h90v45H0z" fill="{{ $colorsList[1] }}" />
-        <path d="M0 45a38 38 0 00-76 0h76z" fill="{{ $colorsList[2] }}" />
-        <path d="M0 45a38 38 0 01-76 0h76z" fill="{{ $colorsList[3] }}" />
-        <path d="M0 45a38 38 0 11-76 0h76z" fill="{{ $colorsList[4] }}" />
-        <path d="M0 45a38 38 0 01-76 0h76z" fill="{{ $colorsList[5] }}" />
-        <path d="M0 45a38 38 0 01-76 0h76z" fill="{{ $colorsList[6] }}" />
-        <path d="M0 45a38 38 0 01-76 0h76z" fill="{{ $colorsList[7] }}" />
-        <path d="M0 45a38 38 0 01-76 0h76z" fill="{{ $colorsList[8] }}" />
-        <path d="M0 45a38 38 0 01-76 0h76z" fill="{{ $colorsList[8] }}" />
+        <path d="M83 45a38 38 0 00-76 0h76z" fill="{{ $colorsList[2] }}" />
+        <path d="M83 45a38 38 0 01-76 0h76z" fill="{{ $colorsList[3] }}" />
+        <path d="M77 45a32 32 0 10-64 0h64z" fill="{{ $colorsList[4] }}" />
+        <path d="M77 45a32 32 0 11-64 0h64z" fill="{{ $colorsList[5] }}" />
+        <path d="M71 45a26 26 0 00-52 0h52z" fill="{{ $colorsList[6] }}" />
+        <path d="M71 45a26 26 0 01-52 0h52z" fill="{{ $colorsList[7] }}" />
         <circle cx="45" cy="45" r="23" fill="{{ $colorsList[8] }}" />
     </g>
 </svg>
