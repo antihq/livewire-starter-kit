@@ -19,10 +19,10 @@
     for ($i = 0; $i < $ELEMENTS; $i++) {
         $elementsProperties[] = [
             'color' => $utilities->getRandomColor($numFromName + $i, $colors, $range),
-            'translateX' => $utilities->getUnit($numFromName * ($i + 1), $SIZE / 10, 1),
-            'translateY' => $utilities->getUnit($numFromName * ($i + 1), $SIZE / 10, 2),
-            'scale' => 1.2 + $utilities->getUnit($numFromName * ($i + 1), $SIZE / 20) / 10,
-            'rotate' => $utilities->getUnit($numFromName * ($i + 1), 360, 1),
+            'translateX' => $utilities->getUnit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 10), 1),
+            'translateY' => $utilities->getUnit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 10), 2),
+            'scale' => 1.2 + $utilities->getUnit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 20)) / 10,
+            'rotate' => $utilities->getUnit((int) ($numFromName * ($i + 1)), 360, 1),
         ];
     }
 

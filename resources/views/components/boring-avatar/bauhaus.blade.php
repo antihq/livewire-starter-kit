@@ -19,9 +19,9 @@
     for ($i = 0; $i < $ELEMENTS; $i++) {
         $elementsProperties[] = [
             'color' => $utilities->getRandomColor($numFromName + $i, $colors, $range),
-            'translateX' => $utilities->getUnit($numFromName * ($i + 1), $SIZE / 2 - ($i + 17), 1),
-            'translateY' => $utilities->getUnit($numFromName * ($i + 1), $SIZE / 2 - ($i + 17), 2),
-            'rotate' => $utilities->getUnit($numFromName * ($i + 1), 360),
+            'translateX' => $utilities->getUnit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 2 - ($i + 17)), 1),
+            'translateY' => $utilities->getUnit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 2 - ($i + 17)), 2),
+            'rotate' => $utilities->getUnit((int) ($numFromName * ($i + 1)), 360),
             'isSquare' => $utilities->getBoolean($numFromName, 2),
         ];
     }
