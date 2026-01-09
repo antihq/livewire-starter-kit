@@ -3,17 +3,17 @@
 use Livewire\Component;
 
 new class extends Component {
-    public $name = 'Mary Edwards';
+    public string $name = '';
 
-    public $variant = 'marble';
+    public string $variant = 'marble';
 
-    public $size = 80;
+    public int $size = 80;
 
-    public $square = false;
+    public bool $square = false;
 
-    public function mount()
+    public function mount(): void
     {
-        $this->name = 'John Doe';
+        $this->name = 'Oliver';
     }
 };
 ?>
