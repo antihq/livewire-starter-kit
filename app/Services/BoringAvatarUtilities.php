@@ -9,7 +9,7 @@ class BoringAvatarUtilities
         $hash = 0;
         for ($i = 0; $i < strlen($name); $i++) {
             $character = ord($name[$i]);
-            $hash = (($hash << 5) - $hash) + $character;
+            $hash = (int) (($hash << 5) - $hash) + $character;
             $hash = $hash & $hash;
         }
 
