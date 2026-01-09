@@ -1,41 +1,22 @@
 @php
-    use App\Services\BoringAvatarUtilities;
-
-    $utilities = new BoringAvatarUtilities();
-
-    $name ??= '';
-    $colors ??= ['#E2E8F0', '#CBD5E1', '#94A3B8', '#64748B', '#475569', '#334155', '#1E293B', '#0F172A'];
-    $title ??= false;
-    $square ??= false;
-    $size ??= 40;
-
-    $ELEMENTS = 4;
+    $numFromName = $component->hash($name);
+    $range = count($colors);
+    $maskId = $variant . '-mask-' . preg_replace('/[^a-zA-Z0-9]/', '', $name) . '-' . $numFromName;
     $SIZE = 80;
 
-    $numFromName = $utilities->hash($name);
-    $range = count($colors);
-
     $elementsProperties = [];
-    for ($i = 0; $i < $ELEMENTS; $i++) {
+    for ($i = 0; $i < 4; $i++) {
         $elementsProperties[] = [
-            'color' => $utilities->randomColor($numFromName + $i, $colors, $range),
-            'translateX' => $utilities->unit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 2 - ($i + 17)), 1),
-            'translateY' => $utilities->unit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 2 - ($i + 17)), 2),
-            'rotate' => $utilities->unit((int) ($numFromName * ($i + 1)), 360),
-            'isSquare' => $utilities->boolean($numFromName, 2),
+            'color' => $component->randomColor((int) ($numFromName + $i), $colors, $range),
+            'translateX' => $component->unit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 2 - ($i + 17)), 1),
+            'translateY' => $component->unit((int) ($numFromName * ($i + 1)), (int) ($SIZE / 2 - ($i + 17)), 2),
+            'rotate' => $component->unit((int) ($numFromName * ($i + 1)), 360),
+            'isSquare' => $component->boolean($numFromName, 2),
         ];
     }
-
-    $maskId = 'bauhaus-mask-' . preg_replace('/[^a-zA-Z0-9]/', '', $name) . '-' . $numFromName;
 @endphp
 
-<svg
-    viewBox="0 0 {{ $SIZE }} {{ $SIZE }}"
-    fill="none"
-    role="img"
-    xmlns="http://www.w3.org/2000/svg"
-    {{ $attributes->merge(['width' => $size, 'height' => $size]) }}
->
+<svg viewBox="0 0 {{ $SIZE }} {{ $SIZE }}" fill="none" role="img" xmlns="http://www.w3.org/2000/svg" {{ $attributes->merge(['width' => $size, 'height' => $size]) }}>
     @if ($title)
         <title>{{ $name }}</title>
     @endif
@@ -53,16 +34,14 @@
             width="{{ $SIZE }}"
             height="{{ $elementsProperties[1]['isSquare'] ? $SIZE : $SIZE / 8 }}"
             fill="{{ $elementsProperties[1]['color'] }}"
-            transform="translate({{ $elementsProperties[1]['translateX'] }} {{ $elementsProperties[1]['translateY'] }}) rotate({{ $elementsProperties[1]['rotate'] }} {{ $SIZE / 2 }} {{ $SIZE / 2 }})"
-        />
+            transform="translate({{ $elementsProperties[1]['translateX'] }} {{ $elementsProperties[1]['translateY'] }}) rotate({{ $elementsProperties[1]['rotate'] }} {{ $SIZE / 2 }})" />
 
         <circle
             cx="{{ $SIZE / 2 }}"
             cy="{{ $SIZE / 2 }}"
             fill="{{ $elementsProperties[2]['color'] }}"
             r="{{ $SIZE / 5 }}"
-            transform="translate({{ $elementsProperties[2]['translateX'] }} {{ $elementsProperties[2]['translateY'] }})"
-        />
+            transform="translate({{ $elementsProperties[2]['translateX'] }} {{ $elementsProperties[2]['translateY'] }})" />
 
         <line
             x1="0"
@@ -71,7 +50,6 @@
             y2="{{ $SIZE / 2 }}"
             stroke-width="2"
             stroke="{{ $elementsProperties[3]['color'] }}"
-            transform="translate({{ $elementsProperties[3]['translateX'] }} {{ $elementsProperties[3]['translateY'] }}) rotate({{ $elementsProperties[3]['rotate'] }} {{ $SIZE / 2 }} {{ $SIZE / 2 }})"
-        />
+            transform="translate({{ $elementsProperties[3]['translateX'] }} {{ $elementsProperties[3]['translateY'] }}) rotate({{ $elementsProperties[3]['rotate'] }} {{ $SIZE / 2 }})" />
     </g>
 </svg>

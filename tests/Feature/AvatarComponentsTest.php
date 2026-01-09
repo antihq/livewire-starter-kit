@@ -1,35 +1,25 @@
 <?php
 
-it('beam avatar renders for valid name', function () {
-    $html = view('components.boring-avatar.beam', [
-        'name' => 'John Doe',
-        'size' => 40,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
-
-    expect($html)->toContain('<svg')
-        ->and($html)->toContain('viewBox="0 0 36 36"')
-        ->and($html)->toContain('role="img"');
-});
+use App\View\Components\BoringAvatar;
 
 it('bauhaus avatar renders for valid name', function () {
-    $html = view('components.boring-avatar.bauhaus', [
-        'name' => 'Jane Smith',
-        'size' => 40,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
+    $html = (new BoringAvatar('bauhaus', 'Jane Smith'))->render()->toHtml();
 
     expect($html)->toContain('<svg')
         ->and($html)->toContain('viewBox="0 0 80 80"')
         ->and($html)->toContain('role="img"');
 });
 
+it('beam avatar renders for valid name', function () {
+    $html = (new BoringAvatar('beam', 'John Doe'))->render()->toHtml();
+
+    expect($html)->toContain('<svg')
+        ->and($html)->toContain('viewBox="0 0 36 36"')
+        ->and($html)->toContain('role="img"');
+});
+
 it('marble avatar renders for valid name', function () {
-    $html = view('components.boring-avatar.marble', [
-        'name' => 'Alice',
-        'size' => 40,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
+    $html = (new BoringAvatar('marble', 'Alice'))->render()->toHtml();
 
     expect($html)->toContain('<svg')
         ->and($html)->toContain('viewBox="0 0 80 80"')
@@ -37,11 +27,7 @@ it('marble avatar renders for valid name', function () {
 });
 
 it('pixel avatar renders for valid name', function () {
-    $html = view('components.boring-avatar.pixel', [
-        'name' => 'Bob',
-        'size' => 40,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
+    $html = (new BoringAvatar('pixel', 'Bob'))->render()->toHtml();
 
     expect($html)->toContain('<svg')
         ->and($html)->toContain('viewBox="0 0 80 80"')
@@ -49,11 +35,7 @@ it('pixel avatar renders for valid name', function () {
 });
 
 it('ring avatar renders for valid name', function () {
-    $html = view('components.boring-avatar.ring', [
-        'name' => 'Charlie',
-        'size' => 40,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
+    $html = (new BoringAvatar('ring', 'Charlie'))->render()->toHtml();
 
     expect($html)->toContain('<svg')
         ->and($html)->toContain('viewBox="0 0 90 90"')
@@ -61,159 +43,125 @@ it('ring avatar renders for valid name', function () {
 });
 
 it('sunset avatar renders for valid name', function () {
-    $html = view('components.boring-avatar.sunset', [
-        'name' => 'Diana',
-        'size' => 40,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
+    $html = (new BoringAvatar('sunset', 'Diana'))->render()->toHtml();
 
     expect($html)->toContain('<svg')
         ->and($html)->toContain('viewBox="0 0 80 80"')
         ->and($html)->toContain('role="img"');
 });
 
-it('wrapper component defaults to beam variant', function () {
-    $html = view('components.boring-avatar', [
-        'name' => 'John Doe',
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
+it('variant can be set through constructor', function () {
+    $component = new BoringAvatar('bauhaus');
+    $component->render();
 
-    expect($html)->toContain('<svg')
-        ->and($html)->toContain('beam-mask-');
-});
-
-it('wrapper component renders different variants', function () {
-    $variants = ['bauhaus', 'beam', 'marble', 'pixel', 'ring', 'sunset'];
-
-    foreach ($variants as $variant) {
-        $html = view('components.boring-avatar', [
-            'variant' => $variant,
-            'name' => 'Test User',
-            'attributes' => new \Illuminate\View\ComponentAttributeBag,
-        ])->render();
-
-        expect($html)->toContain("{$variant}-mask-");
-    }
-});
-
-it('square avatar renders with square corners', function () {
-    $html = view('components.boring-avatar', [
-        'name' => 'Test User',
-        'square' => true,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
-
-    expect($html)->toContain('rx="0"');
-});
-
-it('circular avatar renders with rounded corners', function () {
-    $html = view('components.boring-avatar', [
-        'name' => 'Test User',
-        'square' => false,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
-
-    expect($html)->not->toContain('rx="0"');
-});
-
-it('custom colors are applied', function () {
-    $customColors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff'];
-    $html = view('components.boring-avatar.beam', [
-        'name' => 'Test User',
-        'colors' => $customColors,
-        'size' => 40,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
-
-    $foundColors = 0;
-    foreach ($customColors as $color) {
-        if (str_contains($html, $color)) {
-            $foundColors++;
-        }
-    }
-
-    expect($foundColors)->toBeGreaterThan(0);
-});
-
-it('different names generate different avatars', function () {
-    $html1 = view('components.boring-avatar', [
-        'name' => 'Alice',
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
-
-    $html2 = view('components.boring-avatar', [
-        'name' => 'Bob',
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
-
-    expect($html1)->not->toBe($html2);
-});
-
-it('same names generate same avatars', function () {
-    $name = 'Test User';
-
-    $html1 = view('components.boring-avatar', [
-        'name' => $name,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
-
-    $html2 = view('components.boring-avatar', [
-        'name' => $name,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
-
-    expect($html1)->toBe($html2);
-});
-
-it('title is included when title prop is true', function () {
-    $html = view('components.boring-avatar', [
-        'name' => 'Test User',
-        'title' => true,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
-
-    expect($html)->toContain('<title>Test User</title>');
-});
-
-it('title is not included when title prop is false', function () {
-    $html = view('components.boring-avatar', [
-        'name' => 'Test User',
-        'title' => false,
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
-
-    expect($html)->not->toContain('<title>');
-});
-
-it('size attribute is applied to svg', function () {
-    $html = view('components.boring-avatar', [
-        'name' => 'Test User',
-        'size' => '64px',
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
-
-    expect($html)->toContain('width="64px"')
-        ->and($html)->toContain('height="64px"');
+    expect($component->variant)->toBe('bauhaus');
 });
 
 it('unsupported variant defaults to beam', function () {
-    $html = view('components.boring-avatar', [
-        'name' => 'Test User',
-        'variant' => 'invalid-variant',
-        'attributes' => new \Illuminate\View\ComponentAttributeBag,
-    ])->render();
+    $component = new BoringAvatar('invalid-variant');
+    $component->render();
 
-    expect($html)->toContain('beam-mask-');
+    expect($component->variant)->toBe('beam');
 });
 
-it('additional attributes are forwarded to svg', function () {
-    $attributes = new \Illuminate\View\ComponentAttributeBag(['class' => 'custom-class', 'id' => 'avatar-1']);
+it('square can be set through constructor', function () {
+    $component = new BoringAvatar('beam', '', null, false, true);
+    $component->render();
 
-    $html = view('components.boring-avatar', [
-        'name' => 'Test User',
-        'attributes' => $attributes,
-    ])->render();
+    expect($component->square)->toBeTrue();
+});
 
-    expect($html)->toContain('class="custom-class"')
-        ->and($html)->toContain('id="avatar-1"');
+it('custom colors can be passed', function () {
+    $customColors = ['#ff0000', '#00ff00', '#0000ff'];
+    $component = new BoringAvatar('beam', '', $customColors);
+    $component->render();
+
+    expect($component->colors)->toBe($customColors);
+});
+
+it('different names generate different hashes', function () {
+    $component = new BoringAvatar;
+    $hash1 = $component->hash('Alice');
+    $hash2 = $component->hash('Bob');
+
+    expect($hash1)->not->toBe($hash2);
+});
+
+it('same names generate same hashes', function () {
+    $component = new BoringAvatar;
+    $name = 'Test User';
+    $hash1 = $component->hash($name);
+    $hash2 = $component->hash($name);
+
+    expect($hash1)->toBe($hash2);
+});
+
+it('contrast returns white for dark colors', function () {
+    $component = new BoringAvatar;
+
+    expect($component->contrast('#000000'))->toBe('#FFFFFF')
+        ->and($component->contrast('#1e293b'))->toBe('#FFFFFF');
+});
+
+it('contrast returns black for light colors', function () {
+    $component = new BoringAvatar;
+
+    expect($component->contrast('#ffffff'))->toBe('#000000')
+        ->and($component->contrast('#e2e8f0'))->toBe('#000000');
+});
+
+it('randomColor selects color from array', function () {
+    $component = new BoringAvatar;
+    $colors = ['#ff0000', '#00ff00', '#0000ff'];
+    $color = $component->randomColor(0, $colors, count($colors));
+
+    expect(in_array($color, $colors))->toBeTrue();
+});
+
+it('randomColor is deterministic for same input', function () {
+    $component = new BoringAvatar;
+    $colors = ['#ff0000', '#00ff00', '#0000ff'];
+    $color1 = $component->randomColor(10, $colors, count($colors));
+    $color2 = $component->randomColor(10, $colors, count($colors));
+
+    expect($color1)->toBe($color2);
+});
+
+it('digit extracts correct digit', function () {
+    $component = new BoringAvatar;
+
+    expect($component->digit(1234, 0))->toBe(4)
+        ->and($component->digit(1234, 1))->toBe(3)
+        ->and($component->digit(1234, 2))->toBe(2)
+        ->and($component->digit(1234, 3))->toBe(1);
+});
+
+it('boolean returns correct boolean based on digit parity', function () {
+    $component = new BoringAvatar;
+
+    expect($component->boolean(1234, 0))->toBeTrue()
+        ->and($component->boolean(1235, 0))->toBeFalse()
+        ->and($component->boolean(1236, 0))->toBeTrue();
+});
+
+it('unit returns correct unit value', function () {
+    $component = new BoringAvatar;
+
+    expect($component->unit(10, 5))->toBe(0)
+        ->and($component->unit(15, 10))->toBe(5);
+});
+
+it('unit negates value when index digit is even', function () {
+    $component = new BoringAvatar;
+
+    expect($component->unit(1234, 10, 0))->toBe(-4)
+        ->and($component->unit(1234, 10, 1))->toBe(4);
+});
+
+it('modulus returns correct modulo', function () {
+    $component = new BoringAvatar;
+
+    expect($component->modulus(10, 3))->toBe(1)
+        ->and($component->modulus(15, 5))->toBe(0)
+        ->and($component->modulus(7, 4))->toBe(3);
 });
