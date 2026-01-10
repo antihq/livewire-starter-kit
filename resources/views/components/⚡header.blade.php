@@ -4,8 +4,7 @@ use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-new class extends Component
-{
+new class extends Component {
     public ?int $team = null;
 
     public function mount(): void
@@ -30,11 +29,7 @@ new class extends Component
     <flux:sidebar.toggle class="lg:hidden" icon="bars-2" />
 
     <flux:navbar class="max-lg:hidden">
-        <flux:navbar.item
-            :href="route('dashboard')"
-            :current="request()->routeIs('dashboard')"
-            wire:navigate
-        >
+        <flux:navbar.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
             Dashboard
         </flux:navbar.item>
     </flux:navbar>
@@ -43,13 +38,19 @@ new class extends Component
 
     <!-- Desktop User Menu -->
     <flux:dropdown position="top" align="end">
-        <flux:profile
-            class="cursor-pointer"
-            :avatar="auth()->user()->profile_photo_url"
-            :initials="auth()->user()->initials()"
-            avatar:size="xs"
-            :chevron="false"
-        />
+        <flux:profile class="cursor-pointer" :chevron="false">
+            <x-slot:avatar>
+                @if (auth()->user()->profile_photo_path)
+                    <flux:avatar :src="auth()->user()->profile_photo_url" size="xs" circle />
+                @else
+                    <x-boring-avatar
+                        :name="auth()->user()->name"
+                        variant="beam"
+                        class="[:where(&)]:size-7 sm:[:where(&)]:size-6"
+                    />
+                @endif
+            </x-slot>
+        </flux:profile>
 
         <flux:menu class="min-w-64">
             <flux:menu.group heading="Account">
