@@ -18,8 +18,6 @@ Route::middleware([
     Route::view('dashboard', 'dashboard')->name('dashboard');
 });
 
-Route::livewire('test', 'pages::test')->name('test');
-
 Route::middleware(['auth'])->group(function () {
     Route::livewire('teams/create', 'pages::teams.create')->name('teams.create');
     Route::livewire('teams/{team}', 'pages::teams.show')->name('teams.edit');
