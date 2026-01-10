@@ -80,16 +80,6 @@ new class extends Component
                     autofocus
                 />
 
-                <flux:select variant="combobox" placeholder="Choose industry...">
-    <flux:select.option>Photography</flux:select.option>
-    <flux:select.option>Design services</flux:select.option>
-    <flux:select.option>Web development</flux:select.option>
-    <flux:select.option>Accounting</flux:select.option>
-    <flux:select.option>Legal services</flux:select.option>
-    <flux:select.option>Consulting</flux:select.option>
-    <flux:select.option>Other</flux:select.option>
-</flux:select>
-
                 @if (Gate::check('update', $team))
                     <div class="flex items-center gap-4">
                         <div class="flex items-center justify-end">
