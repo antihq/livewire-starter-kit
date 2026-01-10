@@ -8,7 +8,6 @@
     </mask>
 
     <g mask="url(#{{ $maskId }})">
-        <rect width="{{ $SIZE }}" height="{{ $SIZE }}" fill="{{ $colorsList[0] }}" />
         <path fill="url(#{{ $gradient0Id }})" d="M0 0h80v40H0z" />
         <path fill="url(#{{ $gradient1Id }})" d="M0 40h80v40H0z" />
     </g>

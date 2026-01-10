@@ -314,12 +314,14 @@ class BoringAvatar extends Component
 
     public function hash(string $str): int
     {
-        $hash = 5381;
-        $len = strlen($str); // Calculate length once
-        for ($i = 0; $i < $len; $i++) {
-            $hash = (($hash << 5) + $hash) + ord($str[$i]); // Core hash
+        $hash = 0;
+        for ($i = 0; $i < strlen($str); $i++) {
+            $character = ord($str[$i]);
+            $hash = (($hash << 5) - $hash) + $character;
+            $hash = $hash & $hash;
         }
-        return (int) $hash;
+
+        return abs($hash);
     }
 
     public function contrast(string $color): string
@@ -332,12 +334,11 @@ class BoringAvatar extends Component
         return $colors[$this->modulus($numFromName, $range)];
     }
 
-    public function unit(int $numFromName, int $range, int $index = 0): int
+    public function unit(int $numFromName, int $range, ?int $index = null): int
     {
-        $digit = (int) ($numFromName / pow(10, $index)) % 10;
         $value = $numFromName % $range;
 
-        if ($digit % 2 === 0) {
+        if ($index !== null && (($this->digit($numFromName, $index) % 2) === 0)) {
             return -$value;
         }
 
@@ -351,7 +352,7 @@ class BoringAvatar extends Component
 
     public function isEvenBit(int $numFromName, int $index): bool
     {
-        return ($numFromName >> $index) % 2 === 0;
+        return ! (($this->digit($numFromName, $index) % 2));
     }
 
     public function boolean(int $numFromName, int $index): bool
