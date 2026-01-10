@@ -116,8 +116,8 @@ new #[Title('Profile')] class extends Component
                                 class="size-full rounded-full object-cover"
                             />
                         @else
-                            <!-- Show default icon if no file is uploaded -->
-                            <flux:icon name="user" variant="solid" class="text-zinc-500 dark:text-zinc-400" />
+                            <!-- Show boring avatar if no file is uploaded -->
+                            <x-boring-avatar :name="auth()->user()->name" variant="beam" :size="80" />
                         @endif
 
                         <!-- Corner upload icon -->
