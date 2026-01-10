@@ -92,7 +92,7 @@ class BoringAvatar extends Component
         }
 
         return view('components.boring-avatar.bauhaus', $this->getViewData([
-            'SIZE' => self::SIZE_BAUHAUS,
+            'baseSize' => self::SIZE_BAUHAUS,
             'maskId' => $maskId,
             'elementsProperties' => $elementsProperties,
         ]));
@@ -132,7 +132,7 @@ class BoringAvatar extends Component
         $mouthPath = $this->generateMouthPath($faceData);
 
         return view('components.boring-avatar.beam', $this->getViewData([
-            'SIZE' => self::SIZE_BEAM,
+            'baseSize' => self::SIZE_BEAM,
             'data' => $faceData,
             'mouthPath' => $mouthPath,
             'maskId' => $maskId,
@@ -158,7 +158,7 @@ class BoringAvatar extends Component
         }
 
         return view('components.boring-avatar.marble', $this->getViewData([
-            'SIZE' => self::SIZE_MARBLE,
+            'baseSize' => self::SIZE_MARBLE,
             'elementsProperties' => $elementsProperties,
             'filterId' => $filterId,
             'maskId' => $maskId,
@@ -179,7 +179,7 @@ class BoringAvatar extends Component
         $positions = $this->generatePixelPositions();
 
         return view('components.boring-avatar.pixel', $this->getViewData([
-            'SIZE' => self::SIZE_PIXEL,
+            'baseSize' => self::SIZE_PIXEL,
             'pixelColors' => $pixelColors,
             'positions' => $positions,
             'maskId' => $maskId,
@@ -210,7 +210,7 @@ class BoringAvatar extends Component
         ];
 
         return view('components.boring-avatar.ring', $this->getViewData([
-            'SIZE' => self::SIZE_RING,
+            'baseSize' => self::SIZE_RING,
             'colorsList' => $colorsList,
             'maskId' => $maskId,
         ]));
@@ -232,7 +232,7 @@ class BoringAvatar extends Component
         $gradient1Id = "gradient-paint1-linear-{$nameWithoutSpace}";
 
         return view('components.boring-avatar.sunset', $this->getViewData([
-            'SIZE' => self::SIZE_SUNSET,
+            'baseSize' => self::SIZE_SUNSET,
             'colorsList' => $colorsList,
             'nameWithoutSpace' => $nameWithoutSpace,
             'gradient0Id' => $gradient0Id,
