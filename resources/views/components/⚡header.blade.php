@@ -29,8 +29,8 @@ new class extends Component {
     <flux:sidebar.toggle class="lg:hidden" icon="bars-2" />
 
     <flux:navbar class="max-lg:hidden">
-        <flux:navbar.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-            Dashboard
+        <flux:navbar.item :href="route('passwords.index')" :current="request()->routeIs('passwords.index')" wire:navigate>
+            Passwords
         </flux:navbar.item>
     </flux:navbar>
 

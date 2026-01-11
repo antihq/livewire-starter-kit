@@ -82,7 +82,7 @@ new class extends Component
 
         @if ($this->passwords->isNotEmpty())
             <flux:modal.trigger name="create-password">
-                <flux:button variant="primary">Add password</flux:button>
+                <flux:button variant="primary" class="-my-0.5">Add password</flux:button>
             </flux:modal.trigger>
         @endif
     </div>
@@ -120,7 +120,7 @@ new class extends Component
 
                 <flux:input wire:model="username" label="Username" type="text" required />
 
-                <flux:input wire:model="password" label="Password" type="text" required copyable>
+                <flux:input wire:model="password" label="Password" type="password" required viewable copyable>
                     <x-slot name="iconTrailing">
                         <flux:button size="sm" variant="subtle" icon="sparkles" class="-mr-1" wire:click="generatePassword" />
                     </x-slot>

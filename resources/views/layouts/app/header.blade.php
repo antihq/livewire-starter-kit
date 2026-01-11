@@ -24,11 +24,11 @@
 
             <flux:sidebar.nav>
                 <flux:sidebar.item
-                    :href="route('dashboard')"
-                    :current="request()->routeIs('dashboard')"
+                    :href="route('passwords.index')"
+                    :current="request()->routeIs('passwords.index')"
                     wire:navigate
                 >
-                    Dashboard
+                    Passwords
                 </flux:sidebar.item>
             </flux:sidebar.nav>
         </flux:sidebar>
