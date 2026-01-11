@@ -59,6 +59,44 @@ it('validates required fields when creating password', function () {
         ->assertHasErrors(['name', 'username', 'password']);
 });
 
+it('can generate a password', function () {
+    Livewire::actingAs($this->user)
+        ->test('pages::passwords.index')
+        ->call('generatePassword')
+        ->assertSet('password', fn ($p) => strlen($p) === 20)
+        ->assertSet('password', fn ($p) => substr_count($p, '-') === 2)
+        ->assertSet('password', fn ($p) => preg_match('/^[a-z]{6}-[a-z0-9]{6}-[A-Z][a-z]{5}$/', $p) === 1);
+});
+
+it('can regenerate a password', function () {
+    $component = Livewire::actingAs($this->user)
+        ->test('pages::passwords.index');
+
+    $component->call('generatePassword')
+        ->assertSet('password', $firstPassword = $component->get('password'));
+
+    $component->call('generatePassword')
+        ->assertSet('password', fn ($p) => $p !== $firstPassword);
+});
+
+it('can create a password with auto-generated password', function () {
+    Livewire::actingAs($this->user)
+        ->test('pages::passwords.index')
+        ->set('name', 'GitHub')
+        ->set('username', 'github@example.com')
+        ->call('generatePassword')
+        ->call('create')
+        ->assertSet('name', '')
+        ->assertSet('username', '')
+        ->assertSet('password', '');
+
+    $this->assertDatabaseHas('passwords', [
+        'name' => 'GitHub',
+        'username' => 'github@example.com',
+        'team_id' => $this->team->id,
+    ]);
+});
+
 it('can enter edit mode from modal', function () {
     $password = Password::factory()->create(['team_id' => $this->team->id]);
 

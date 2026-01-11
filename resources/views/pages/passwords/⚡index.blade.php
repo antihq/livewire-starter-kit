@@ -7,6 +7,11 @@ use Livewire\Component;
 
 new class extends Component
 {
+    public function mount()
+    {
+        $this->generatePassword();
+    }
+
     #[Computed]
     public function user()
     {
@@ -26,6 +31,18 @@ new class extends Component
     public $username = '';
 
     public $password = '';
+
+    public function generatePassword(): void
+    {
+        $lowercase = 'abcdefghijklmnopqrstuvwxyz';
+        $alphanumeric = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
+        $part1 = substr(str_shuffle(str_repeat($lowercase, 3)), 0, 6);
+        $part2 = substr(str_shuffle(str_repeat($alphanumeric, 3)), 0, 6);
+        $part3 = ucfirst(substr(str_shuffle(str_repeat($lowercase, 3)), 0, 6));
+
+        $this->password = sprintf('%s-%s-%s', $part1, $part2, $part3);
+    }
 
     public function create()
     {
@@ -99,7 +116,11 @@ new class extends Component
 
                 <flux:input wire:model="username" label="Username" type="text" required />
 
-                <flux:input wire:model="password" label="Password" type="text" required />
+                <flux:input wire:model="password" label="Password" type="text" required copyable>
+                    <x-slot name="iconTrailing">
+                        <flux:button size="sm" variant="subtle" icon="sparkles" class="-mr-1" wire:click="generatePassword" />
+                    </x-slot>
+                </flux:input>
             </div>
 
             <div
