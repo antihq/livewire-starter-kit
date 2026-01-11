@@ -1,36 +1,38 @@
 <?php
 
 use App\Models\Password;
+use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 new class extends Component
 {
+    public $name = '';
+
+    public $username = '';
+
+    public $password = '';
+
     public function mount()
     {
         $this->generatePassword();
     }
 
     #[Computed]
-    public function user()
+    public function team(): Team
     {
-        return Auth::user();
+        return Auth::user()->currentTeam;
     }
 
     #[Computed]
     public function passwords()
     {
-        return Password::where('team_id', $this->user->current_team_id)
+        return $this->team
+            ->passwords()
             ->latest()
             ->get();
     }
-
-    public $name = '';
-
-    public $username = '';
-
-    public $password = '';
 
     public function generatePassword(): void
     {
@@ -54,7 +56,7 @@ new class extends Component
             'password' => ['required', 'string'],
         ]);
 
-        $this->user->currentTeam->passwords()->create([
+        $this->team->passwords()->create([
             'name' => $this->pull('name'),
             'username' => $this->pull('username'),
             'password' => $this->pull('password'),
@@ -78,7 +80,7 @@ new class extends Component
 
         @if ($this->passwords->isNotEmpty())
             <flux:modal.trigger name="create-password">
-                <flux:button variant="primary">Create password</flux:button>
+                <flux:button variant="primary">Add password</flux:button>
             </flux:modal.trigger>
         @endif
     </div>
@@ -95,10 +97,10 @@ new class extends Component
                 <flux:icon.key variant="outline" class="size-6 text-zinc-500 dark:text-zinc-400" />
             </div>
             <flux:heading class="mt-2">No passwords</flux:heading>
-            <flux:text class="mt-1">Get started by creating a new password.</flux:text>
+            <flux:text class="mt-1">Get started by adding a new password.</flux:text>
             <div class="mt-6">
                 <flux:modal.trigger name="create-password">
-                    <flux:button variant="primary">Create password</flux:button>
+                    <flux:button variant="primary">Add password</flux:button>
                 </flux:modal.trigger>
             </div>
         </div>
@@ -108,8 +110,8 @@ new class extends Component
         <form wire:submit="create" class="space-y-8">
             <div class="space-y-6">
                 <div class="space-y-2">
-                    <flux:heading size="lg">Create password</flux:heading>
-                    <flux:text>Create a new password credential to store securely.</flux:text>
+                    <flux:heading size="lg">Add password</flux:heading>
+                    <flux:text>Store a new password credential securely.</flux:text>
                 </div>
 
                 <flux:input wire:model="name" label="Name" type="text" required autofocus />
