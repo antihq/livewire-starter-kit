@@ -66,82 +66,27 @@ new class extends Component
 
         @if ($this->passwords->isNotEmpty())
             <flux:modal.trigger name="create-password">
-                <flux:button variant="primary">Create Password</flux:button>
+                <flux:button variant="primary">Create password</flux:button>
             </flux:modal.trigger>
         @endif
     </div>
 
     @if ($this->passwords->isNotEmpty())
-        <ul role="list" class="divide-y divide-white/5 overflow-hidden bg-gray-800/50 outline-1 outline-white/10 sm:rounded-xl sm:-outline-offset-1">
+        <ul role="list" class="divide-y divide-zinc-200 dark:divide-white/10 overflow-hidden">
             @foreach ($this->passwords as $password)
-                <li wire:key="password-{{ $password->id }}" class="relative flex justify-between gap-x-6 px-4 py-5 hover:bg-white/2.5 sm:px-6">
+                <li wire:key="password-{{ $password->id }}" class="relative flex justify-between gap-x-6 py-5">
                     <div class="flex min-w-0 gap-x-4">
-                        <div class="size-12 flex-none rounded-full bg-gray-800 outline -outline-offset-1 outline-white/10 flex items-center justify-center">
-                            <flux:icon.key variant="outline" class="size-6 text-zinc-500 dark:text-zinc-400" />
-                        </div>
                         <div class="min-w-0 flex-auto">
-                            <p class="text-sm/6 font-semibold text-white">
-                                {{ $password->name }}
-                            </p>
-                            <p class="mt-1 flex text-xs/5 text-gray-400 truncate">
+                            <flux:heading>
+                                <a href="{{ route('passwords.edit', $password) }}">
+                                    <span class="absolute inset-x-0 -top-px bottom-0"></span>
+                                    {{ $password->name }}
+                                </a>
+                            </flux:heading>
+                            <flux:text size="sm">
                                 {{ $password->username }}
-                            </p>
+                            </flux:text>
                         </div>
-                    </div>
-                    <div class="flex shrink-0 items-center gap-x-4">
-                        <div class="hidden sm:flex sm:flex-col sm:items-end gap-2">
-                            <div class="flex gap-2">
-                                <flux:button
-                                    variant="ghost"
-                                    size="sm"
-                                    wire:click="copyToClipboard('{{ $password->username }}')"
-                                >Copy Username</flux:button>
-                                <flux:button
-                                    variant="ghost"
-                                    size="sm"
-                                    wire:click="copyToClipboard('{{ $password->password }}')"
-                                >Copy Password</flux:button>
-                            </div>
-                            <div class="flex gap-2">
-                                <flux:button
-                                    variant="ghost"
-                                    size="sm"
-                                    href="{{ route('passwords.edit', $password) }}"
-                                    wire:navigate
-                                >Edit</flux:button>
-                                <flux:button
-                                    variant="ghost"
-                                    size="sm"
-                                    wire:confirm="Are you sure you want to delete this password?"
-                                    wire:click="delete({{ $password->id }})"
-                                >Delete</flux:button>
-                            </div>
-                        </div>
-                        <div class="flex sm:hidden gap-2">
-                            <flux:button
-                                variant="ghost"
-                                size="sm"
-                                wire:click="copyToClipboard('{{ $password->username }}')"
-                            >Copy Username</flux:button>
-                            <flux:button
-                                variant="ghost"
-                                size="sm"
-                                wire:click="copyToClipboard('{{ $password->password }}')"
-                            >Copy Password</flux:button>
-                            <flux:button
-                                variant="ghost"
-                                size="sm"
-                                href="{{ route('passwords.edit', $password) }}"
-                                wire:navigate
-                            >Edit</flux:button>
-                            <flux:button
-                                variant="ghost"
-                                size="sm"
-                                wire:confirm="Are you sure you want to delete this password?"
-                                wire:click="delete({{ $password->id }})"
-                            >Delete</flux:button>
-                        </div>
-                        <flux:icon.chevron-right class="size-5 flex-none text-gray-500 sm:hidden" />
                     </div>
                 </li>
             @endforeach
