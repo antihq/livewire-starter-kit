@@ -28,13 +28,13 @@ new class extends Component
             'description' => ['required', 'string'],
         ]);
 
-        $this->marketplace->listings()->create([
+        $listing = $this->marketplace->listings()->create([
             'title' => $this->title,
             'description' => $this->description,
             'user_id' => Auth::id(),
         ]);
 
-        return $this->redirectRoute('marketplaces.show', $this->marketplace);
+        return $this->redirectRoute('marketplaces.listings.show', [$this->marketplace, $listing]);
     }
 
     #[Computed]
@@ -51,26 +51,17 @@ new class extends Component
 };
 ?>
 
-<section class="mx-auto max-w-6xl space-y-8">
-    <flux:heading size="xl">Create listing</flux:heading>
+<section class="mx-auto max-w-lg">
+    <flux:heading size="xl">New listing</flux:heading>
 
-    <div class="space-y-14">
-        <div class="space-y-6">
-            <header class="space-y-1">
-                <flux:heading size="lg">Listing details</flux:heading>
-                <flux:text>Create a new listing for {{ $marketplace->name }}.</flux:text>
-            </header>
-
-            <form wire:submit="create" class="w-full max-w-lg space-y-8">
-                <flux:input wire:model="title" label="Listing title" type="text" required autofocus />
-                <flux:textarea wire:model="description" label="Description" required />
-
-                <div class="flex items-center gap-4">
-                    <div class="flex items-center justify-end">
-                        <flux:button variant="primary" type="submit" class="w-full">Create listing</flux:button>
-                    </div>
-                </div>
-            </form>
-        </div>
+    <div class="mt-14 space-y-14">
+        <form wire:submit="create" class="w-full max-w-lg space-y-8">
+            <flux:input wire:model="title" label="Listing title" type="text" required autofocus />
+            <flux:textarea wire:model="description" label="Description" required />
+            <div class="flex justify-end gap-4">
+                <flux:button href="{{ route('marketplaces.show', $marketplace) }}" variant="ghost" wire:navigate>Cancel</flux:button>
+                <flux:button variant="primary" type="submit">Publish listing</flux:button>
+            </div>
+        </form>
     </div>
 </section>

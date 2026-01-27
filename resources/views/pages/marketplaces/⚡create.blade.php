@@ -40,7 +40,7 @@ new class extends Component
 };
 ?>
 
-<section class="mx-auto max-w-lg space-y-8">
+<section class="mx-auto max-w-lg">
     <flux:heading size="xl">Create marketplace</flux:heading>
 
     <form wire:submit="create" class="mt-14 w-full max-w-lg space-y-8">
