@@ -43,12 +43,12 @@ new class extends Component
 <section class="mx-auto max-w-lg space-y-8">
     <flux:heading size="xl">Create marketplace</flux:heading>
 
-    <form wire:submit="create" class="w-full max-w-lg space-y-8 mt-14">
+    <form wire:submit="create" class="mt-14 w-full max-w-lg space-y-8">
         <flux:input wire:model="name" label="Marketplace name" type="text" required autofocus />
-        <div class="flex items-center gap-4">
-            <div class="flex items-center justify-end">
-                <flux:button variant="primary" type="submit" class="w-full">Create marketplace</flux:button>
-            </div>
+
+        <div class="flex justify-end gap-4">
+            <flux:button href="{{ route('marketplaces.index') }}" variant="ghost" wire:navigate>Cancel</flux:button>
+            <flux:button variant="primary" type="submit">Add account</flux:button>
         </div>
     </form>
 </section>
