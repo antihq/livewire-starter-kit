@@ -29,33 +29,56 @@ new class extends Component
     {
         return $this->user->currentTeam;
     }
+
+    #[Computed]
+    public function creator()
+    {
+        return $this->listing->user;
+    }
 }
 ?>
 
-<section class="mx-auto max-w-6xl space-y-8">
-    <div class="flex items-center gap-4">
-        <flux:button href="{{ route('marketplaces.show', $marketplace) }}" wire:navigate variant="ghost">
-            Back
-        </flux:button>
-        <flux:heading size="xl">{{ $listing->title }}</flux:heading>
-    </div>
-
-    <div class="space-y-6">
-        <div class="space-y-1">
-            <flux:heading size="lg">Description</flux:heading>
-            <flux:text>{{ $listing->description }}</flux:text>
+<section class="mx-auto max-w-lg">
+    <div class="mt-4 lg:mt-8">
+        <div class="flex items-center gap-4">
+            <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">{{ $listing->title }}</h1>
         </div>
 
-        @if ($this->user)
-            @if ($this->user->id === $listing->user_id)
-                <flux:button href="{{ route('marketplaces.listings.conversation', [$marketplace, $listing]) }}" wire:navigate>
-                    View messages
-                </flux:button>
-            @else
-                <flux:button href="{{ route('marketplaces.listings.message', [$marketplace, $listing]) }}" wire:navigate>
-                    Send message
-                </flux:button>
-            @endif
-        @endif
+        <div class="isolate mt-2.5 flex flex-wrap justify-between gap-x-6 gap-y-4">
+            <div class="flex flex-wrap gap-x-10 gap-y-4 py-1.5">
+                <span class="flex items-center gap-3 text-base/6 text-zinc-950 sm:text-sm/6 dark:text-white">
+                    <x-boring-avatar
+                        :name="$this->creator->name ?? $this->creator->email"
+                        variant="beam"
+                        size="16"
+                        class="size-4 shrink-0"
+                    />
+                    <span>{{ $this->creator->name ?? $this->creator->email }}</span>
+                </span>
+
+                <span class="flex items-center gap-3 text-base/6 text-zinc-950 sm:text-sm/6 dark:text-white">
+                    <flux:icon name="calendar" variant="micro" class="size-4 shrink-0 fill-zinc-400 dark:fill-zinc-500" />
+                    <span>{{ $listing->created_at->format('M j, Y') }}</span>
+                </span>
+            </div>
+
+            <div class="flex gap-4">
+                @if ($this->user)
+                    @if ($this->user->id === $listing->user_id)
+                        <flux:button href="{{ route('marketplaces.listings.conversation', [$marketplace, $listing]) }}" wire:navigate>
+                            View messages
+                        </flux:button>
+                    @else
+                        <flux:button href="{{ route('marketplaces.listings.message', [$marketplace, $listing]) }}" variant="primary" wire:navigate>
+                            Send message
+                        </flux:button>
+                    @endif
+                @endif
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-12">
+        <flux:text>{{ $listing->description }}</flux:text>
     </div>
 </section>
