@@ -96,12 +96,14 @@ new class extends Component
             </div>
 
             @forelse ($this->listings as $listing)
-                <div class="border-b border-white/10 pb-4">
-                    <div class="space-y-2">
-                        <flux:heading size="md">{{ $listing->title }}</flux:heading>
-                        <flux:text>{{ $listing->description }}</flux:text>
+                <flux:button href="{{ route('marketplaces.listings.show', [$marketplace, $listing]) }}" wire:navigate variant="ghost" class="w-full justify-start !px-0">
+                    <div class="w-full border-b border-white/10 pb-4">
+                        <div class="space-y-2">
+                            <flux:heading size="md">{{ $listing->title }}</flux:heading>
+                            <flux:text>{{ $listing->description }}</flux:text>
+                        </div>
                     </div>
-                </div>
+                </flux:button>
             @empty
                 <flux:text>No listings yet</flux:text>
             @endforelse
