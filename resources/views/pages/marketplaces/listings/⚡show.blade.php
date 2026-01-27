@@ -34,7 +34,7 @@ new class extends Component
 
 <section class="mx-auto max-w-6xl space-y-8">
     <div class="flex items-center gap-4">
-        <flux:button href="{{ route('marketplaces.edit', $marketplace) }}" wire:navigate variant="ghost">
+        <flux:button href="{{ route('marketplaces.show', $marketplace) }}" wire:navigate variant="ghost">
             Back
         </flux:button>
         <flux:heading size="xl">{{ $listing->title }}</flux:heading>

@@ -34,7 +34,7 @@ new class extends Component
             'user_id' => Auth::id(),
         ]);
 
-        return $this->redirectRoute('marketplaces.edit', $this->marketplace);
+        return $this->redirectRoute('marketplaces.show', $this->marketplace);
     }
 
     #[Computed]

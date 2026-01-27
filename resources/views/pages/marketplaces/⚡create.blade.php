@@ -19,7 +19,7 @@ new class extends Component
             'name' => ['required', 'string', 'max:255'],
         ]);
 
-        $mareketplace = $team->marketplaces()->create([
+        $marketplace = $team->marketplaces()->create([
             'name' => $this->name,
         ]);
 
