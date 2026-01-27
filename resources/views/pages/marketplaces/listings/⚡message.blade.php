@@ -69,33 +69,18 @@ new class extends Component
 }
 ?>
 
-<section class="mx-auto max-w-6xl space-y-8">
-    <div class="flex items-center gap-4">
-        <flux:button href="{{ route('marketplaces.listings.show', [$marketplace, $listing]) }}" wire:navigate variant="ghost">
-            Back
-        </flux:button>
-        <flux:heading size="xl">Send a message about {{ $listing->title }}</flux:heading>
-    </div>
+<section class="mx-auto max-w-lg">
+    <flux:heading size="xl">Send a message about {{ $listing->title }}</flux:heading>
 
-    <div class="space-y-6">
-        <div class="space-y-1">
-            <flux:heading size="lg">Listing details</flux:heading>
-            <flux:text>{{ $listing->description }}</flux:text>
-        </div>
-
-        <div class="space-y-1">
-            <flux:heading size="lg">Send your message</flux:heading>
-            <flux:text>Your message will be sent to the listing owner.</flux:text>
-        </div>
-
-        <form wire:submit="send" class="w-full max-w-2xl space-y-8">
+    <div class="mt-12">
+        <form wire:submit="send" class="w-full space-y-8">
             <flux:textarea wire:model="content" label="Your message" rows="6" required autofocus />
 
-            <div class="flex items-center gap-4">
-                <flux:button variant="primary" type="submit">Send message</flux:button>
+            <div class="flex justify-end gap-4">
                 <flux:button href="{{ route('marketplaces.listings.show', [$marketplace, $listing]) }}" wire:navigate variant="ghost">
                     Cancel
                 </flux:button>
+                <flux:button variant="primary" type="submit">Send message</flux:button>
             </div>
         </form>
     </div>
