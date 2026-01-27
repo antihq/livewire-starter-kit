@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
     Route::livewire('marketplaces/{marketplace}', 'pages::marketplaces.show')->name('marketplaces.edit');
     Route::livewire('marketplaces/{marketplace}/listings/create', 'pages::marketplaces.listings.create')->name('marketplaces.listings.create');
     Route::livewire('marketplaces/{marketplace}/listings/{listing}', 'pages::marketplaces.listings.show')->name('marketplaces.listings.show');
+    Route::livewire('marketplaces/{marketplace}/listings/{listing}/message', 'pages::marketplaces.listings.message')->name('marketplaces.listings.message');
+    Route::livewire('marketplaces/{marketplace}/listings/{listing}/conversation', 'pages::marketplaces.listings.conversation')->name('marketplaces.listings.conversation');
 
     Route::redirect('account', 'settings/profile');
 

@@ -31,6 +31,7 @@ new class extends Component
         $this->marketplace->listings()->create([
             'title' => $this->title,
             'description' => $this->description,
+            'user_id' => Auth::id(),
         ]);
 
         return $this->redirectRoute('marketplaces.edit', $this->marketplace);

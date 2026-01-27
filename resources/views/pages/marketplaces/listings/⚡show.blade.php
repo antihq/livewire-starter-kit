@@ -45,5 +45,17 @@ new class extends Component
             <flux:heading size="lg">Description</flux:heading>
             <flux:text>{{ $listing->description }}</flux:text>
         </div>
+
+        @if ($this->user)
+            @if ($this->user->id === $listing->user_id)
+                <flux:button href="{{ route('marketplaces.listings.conversation', [$marketplace, $listing]) }}" wire:navigate>
+                    View messages
+                </flux:button>
+            @else
+                <flux:button href="{{ route('marketplaces.listings.message', [$marketplace, $listing]) }}" wire:navigate>
+                    Send message
+                </flux:button>
+            @endif
+        @endif
     </div>
 </section>
