@@ -2,6 +2,7 @@
 
 use App\Models\Marketplace;
 use Flux\Flux;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 new class extends Component
@@ -42,6 +43,12 @@ new class extends Component
 
         return $this->redirectRoute('marketplaces.index');
     }
+
+    #[Computed]
+    public function listings()
+    {
+        return $this->marketplace->listings;
+    }
 };
 ?>
 
@@ -74,6 +81,30 @@ new class extends Component
                     </div>
                 @endif
             </form>
+        </div>
+
+        <div class="space-y-6">
+            <header class="space-y-1">
+                <flux:heading size="lg">Listings</flux:heading>
+                <flux:text>Manage listings for this marketplace.</flux:text>
+            </header>
+
+            <div class="flex items-center gap-4">
+                <flux:button href="{{ route('marketplaces.listings.create', $marketplace) }}" wire:navigate>
+                    Create listing
+                </flux:button>
+            </div>
+
+            @forelse ($this->listings as $listing)
+                <div class="border-b border-white/10 pb-4">
+                    <div class="space-y-2">
+                        <flux:heading size="md">{{ $listing->title }}</flux:heading>
+                        <flux:text>{{ $listing->description }}</flux:text>
+                    </div>
+                </div>
+            @empty
+                <flux:text>No listings yet</flux:text>
+            @endforelse
         </div>
 
         @if (Gate::check('delete', $marketplace))

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Listing;
 use App\Models\Marketplace;
 use App\Models\User;
 use Livewire\Livewire;

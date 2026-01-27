@@ -2,12 +2,10 @@
 
 namespace App\Models;
 
-use App\Events\MarketplaceCreated;
-use App\Events\MarketplaceDeleted;
-use App\Events\MarketplaceUpdated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Marketplace extends Model
 {
@@ -22,5 +20,10 @@ class Marketplace extends Model
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
+    }
+
+    public function listings(): HasMany
+    {
+        return $this->hasMany(Listing::class);
     }
 }
