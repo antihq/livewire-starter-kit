@@ -25,6 +25,10 @@ Route::middleware(['auth'])->group(function () {
     Route::livewire('teams/{team}', 'pages::teams.show')->name('teams.edit');
     Route::livewire('teams/{team}/members', 'pages::teams.members.index')->name('teams.members.index');
 
+    Route::livewire('marketplaces', 'pages::marketplaces.index')->name('marketplaces.index');
+    Route::livewire('marketplaces/create', 'pages::marketplaces.create')->name('marketplaces.create');
+    Route::livewire('marketplaces/{marketplace}', 'pages::marketplaces.show')->name('marketplaces.edit');
+
     Route::redirect('account', 'settings/profile');
 
     Route::livewire('account/profile', 'pages::account.profile')->name('profile.edit');
