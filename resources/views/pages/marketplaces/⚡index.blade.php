@@ -26,34 +26,42 @@ new class extends Component
 };
 ?>
 
-<section class="mx-auto max-w-6xl space-y-8">
-    <div class="flex items-center justify-between">
+<section class="mx-auto max-w-lg">
+    <div class="flex flex-wrap justify-between gap-x-6 gap-y-4">
         <flux:heading size="xl">Marketplaces</flux:heading>
 
-        <flux:button href="{{ route('marketplaces.create') }}" wire:navigate>
+        <flux:button href="{{ route('marketplaces.create') }}" variant="primary" class="-my-0.5" wire:navigate>
             Create marketplace
         </flux:button>
     </div>
 
-    <div class="space-y-6">
-        @forelse ($this->marketplaces as $marketplace)
-            <div class="flex items-center justify-between rounded-lg border bg-white p-6 dark:border-gray-700 dark:bg-gray-800">
-                <div class="space-y-1">
-                    <flux:heading size="md">{{ $marketplace->name }}</flux:heading>
-                    <flux:text size="sm">Created {{ $marketplace->created_at->diffForHumans() }}</flux:text>
+    <div class="mt-8">
+        <hr role="presentation" class="w-full border-t border-zinc-950/10 dark:border-white/10" />
+        <div class="divide-y divide-zinc-100 overflow-hidden dark:divide-white/5 dark:text-white">
+            @foreach ($this->marketplaces as $marketplace)
+                <div
+                    wire:key="marketplace-{{ $marketplace->id }}"
+                    class="relative flex items-center justify-between gap-4 py-4"
+                >
+                    <div>
+                        <flux:heading class="leading-6!">
+                            <a href="{{ route('marketplaces.show', $marketplace) }}" wire:navigate>
+                                {{ $marketplace->name }}
+                            </a>
+                        </flux:heading>
+                    </div>
+                    <div class="flex shrink-0 items-center gap-x-4">
+                        <flux:dropdown align="end">
+                            <flux:button variant="subtle" square icon="ellipsis-horizontal" />
+                            <flux:menu>
+                                <flux:menu.item href="{{ route('marketplaces.show', $marketplace) }}" wire:navigate>
+                                    View
+                                </flux:menu.item>
+                            </flux:menu>
+                        </flux:dropdown>
+                    </div>
                 </div>
-
-                <div class="flex items-center gap-4">
-                    <flux:button href="{{ route('marketplaces.edit', $marketplace) }}" wire:navigate>
-                        Settings
-                    </flux:button>
-                </div>
-            </div>
-        @empty
-            <div class="rounded-lg border border-dashed p-12 text-center dark:border-gray-700">
-                <flux:heading size="md">No marketplaces yet</flux:heading>
-                <flux:text class="mt-2">Create your first marketplace to get started.</flux:text>
-            </div>
-        @endforelse
+            @endforeach
+        </div>
     </div>
 </section>

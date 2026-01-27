@@ -19,11 +19,11 @@ new class extends Component
             'name' => ['required', 'string', 'max:255'],
         ]);
 
-        $team->marketplaces()->create([
+        $mareketplace = $team->marketplaces()->create([
             'name' => $this->name,
         ]);
 
-        return $this->redirectRoute('marketplaces.index');
+        return $this->redirectRoute('marketplaces.show', $marketplace);
     }
 
     #[Computed]
@@ -40,25 +40,15 @@ new class extends Component
 };
 ?>
 
-<section class="mx-auto max-w-6xl space-y-8">
+<section class="mx-auto max-w-lg space-y-8">
     <flux:heading size="xl">Create marketplace</flux:heading>
 
-    <div class="space-y-14">
-        <div class="space-y-6">
-            <header class="space-y-1">
-                <flux:heading size="lg">Marketplace details</flux:heading>
-                <flux:text>Create a new marketplace for your team.</flux:text>
-            </header>
-
-            <form wire:submit="create" class="w-full max-w-lg space-y-8">
-                <flux:input wire:model="name" label="Marketplace name" type="text" required autofocus />
-
-                <div class="flex items-center gap-4">
-                    <div class="flex items-center justify-end">
-                        <flux:button variant="primary" type="submit" class="w-full">Create marketplace</flux:button>
-                    </div>
-                </div>
-            </form>
+    <form wire:submit="create" class="w-full max-w-lg space-y-8 mt-14">
+        <flux:input wire:model="name" label="Marketplace name" type="text" required autofocus />
+        <div class="flex items-center gap-4">
+            <div class="flex items-center justify-end">
+                <flux:button variant="primary" type="submit" class="w-full">Create marketplace</flux:button>
+            </div>
         </div>
-    </div>
+    </form>
 </section>
