@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('marketplaces', function (Blueprint $table) {
             $table->id();
             $table->foreignId('team_id')->index();
+            $table->foreignId('creator_id')->index();
             $table->string('name');
             $table->timestamps();
         });
