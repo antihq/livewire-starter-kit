@@ -51,7 +51,7 @@ new class extends Component
                     >
                         <div>
                             <flux:heading class="leading-6!">
-                                <a href="{{ route('marketplaces.listings.show', [$marketplace, $listing]) }}" wire:navigate>
+                                <a href="{{ route('listings.show', $listing) }}" wire:navigate>
                                     {{ $listing->title }}
                                 </a>
                             </flux:heading>
@@ -60,7 +60,7 @@ new class extends Component
                             <flux:dropdown align="end">
                                 <flux:button variant="subtle" square icon="ellipsis-horizontal" />
                                 <flux:menu>
-                                    <flux:menu.item href="{{ route('marketplaces.listings.show', [$marketplace, $listing]) }}" wire:navigate>
+                                    <flux:menu.item href="{{ route('listings.show', $listing) }}" wire:navigate>
                                         View
                                     </flux:menu.item>
                                 </flux:menu>

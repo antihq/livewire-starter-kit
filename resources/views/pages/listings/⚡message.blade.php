@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Listing;
-use App\Models\Marketplace;
 use App\Notifications\NewMessageNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -10,22 +9,16 @@ use Livewire\Component;
 
 new class extends Component
 {
-    public Marketplace $marketplace;
-
     public Listing $listing;
 
     public string $content = '';
 
     public function mount()
     {
-        $this->authorize('view', $this->marketplace);
         $this->authorize('view', $this->listing);
 
         if (Auth::id() === $this->listing->creator_id) {
-            return $this->redirectRoute('marketplaces.listings.conversation', [
-                'marketplace' => $this->marketplace,
-                'listing' => $this->listing,
-            ]);
+            return $this->redirectRoute('listings.conversation', $this->listing);
         }
     }
 
@@ -49,10 +42,7 @@ new class extends Component
 
         session()->flash('status', 'Message sent successfully!');
 
-        return $this->redirectRoute('marketplaces.listings.show', [
-            'marketplace' => $this->marketplace,
-            'listing' => $this->listing,
-        ]);
+        return $this->redirectRoute('listings.show', $this->listing);
     }
 
     #[Computed]
@@ -77,7 +67,7 @@ new class extends Component
             <flux:textarea wire:model="content" label="Your message" rows="6" required autofocus />
 
             <div class="flex justify-end gap-4">
-                <flux:button href="{{ route('marketplaces.listings.show', [$marketplace, $listing]) }}" wire:navigate variant="ghost">
+                <flux:button href="{{ route('listings.show', $listing) }}" wire:navigate variant="ghost">
                     Cancel
                 </flux:button>
                 <flux:button variant="primary" type="submit">Send message</flux:button>

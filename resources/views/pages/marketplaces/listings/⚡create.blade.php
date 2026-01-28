@@ -35,7 +35,7 @@ new class extends Component
             'team_id' => $this->team->id,
         ]);
 
-        return $this->redirectRoute('marketplaces.listings.show', [$this->marketplace, $listing]);
+        return $this->redirectRoute('listings.show', $listing);
     }
 
     #[Computed]

@@ -1,20 +1,16 @@
 <?php
 
 use App\Models\Listing;
-use App\Models\Marketplace;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 new class extends Component
 {
-    public Marketplace $marketplace;
-
     public Listing $listing;
 
     public function mount()
     {
-        $this->authorize('view', $this->marketplace);
         $this->authorize('view', $this->listing);
     }
 
@@ -65,11 +61,11 @@ new class extends Component
             <div class="flex gap-4">
                 @if ($this->user)
                     @if ($this->user->id === $listing->creator_id)
-                        <flux:button href="{{ route('marketplaces.conversations.index', $marketplace) }}" wire:navigate>
+                        <flux:button href="{{ route('marketplaces.conversations.index', $listing->marketplace) }}" wire:navigate>
                             View conversations
                         </flux:button>
                     @else
-                        <flux:button href="{{ route('marketplaces.listings.message', [$marketplace, $listing]) }}" variant="primary" wire:navigate>
+                        <flux:button href="{{ route('listings.message', $listing) }}" variant="primary" wire:navigate>
                             Send message
                         </flux:button>
                     @endif

@@ -2,7 +2,6 @@
 
 use App\Models\Conversation;
 use App\Models\Listing;
-use App\Models\Marketplace;
 use App\Notifications\NewMessageNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -11,15 +10,12 @@ use Livewire\Component;
 
 new class extends Component
 {
-    public Marketplace $marketplace;
-
     public Listing $listing;
 
     public string $content = '';
 
     public function mount()
     {
-        $this->authorize('view', $this->marketplace);
         $this->authorize('view', $this->listing);
 
         $userId = Auth::id();
@@ -94,7 +90,7 @@ new class extends Component
 
 <section class="mx-auto max-w-4xl space-y-8">
     <div class="flex items-center gap-4">
-        <flux:button href="{{ route('marketplaces.listings.show', [$marketplace, $listing]) }}" wire:navigate variant="ghost">
+        <flux:button href="{{ route('listings.show', $listing) }}" wire:navigate variant="ghost">
             Back
         </flux:button>
         <flux:heading size="xl">Conversation about {{ $listing->title }}</flux:heading>

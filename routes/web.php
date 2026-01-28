@@ -30,9 +30,9 @@ Route::middleware(['auth'])->group(function () {
     Route::livewire('marketplaces/create', 'pages::marketplaces.create')->name('marketplaces.create');
     Route::livewire('marketplaces/{marketplace}', 'pages::marketplaces.show')->name('marketplaces.show');
     Route::livewire('marketplaces/{marketplace}/listings/create', 'pages::marketplaces.listings.create')->name('marketplaces.listings.create');
-    Route::livewire('marketplaces/{marketplace}/listings/{listing}', 'pages::marketplaces.listings.show')->name('marketplaces.listings.show');
-    Route::livewire('marketplaces/{marketplace}/listings/{listing}/message', 'pages::marketplaces.listings.message')->name('marketplaces.listings.message');
-    Route::livewire('marketplaces/{marketplace}/listings/{listing}/conversation', 'pages::marketplaces.listings.conversation')->name('marketplaces.listings.conversation');
+    Route::livewire('listings/{listing}', 'pages::listings.show')->name('listings.show');
+    Route::livewire('listings/{listing}/message', 'pages::listings.message')->name('listings.message');
+    Route::livewire('listings/{listing}/conversation', 'pages::listings.conversation')->name('listings.conversation');
 
     Route::livewire('marketplaces/{marketplace}/conversations', 'pages::marketplaces.conversations.index')->name('marketplaces.conversations.index');
     Route::livewire('marketplaces/{marketplace}/conversations/{conversation}', 'pages::marketplaces.conversations.show')->name('marketplaces.conversations.show');

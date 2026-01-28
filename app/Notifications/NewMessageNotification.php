@@ -31,10 +31,7 @@ class NewMessageNotification extends Notification implements ShouldQueue
             ->line("{$sender} sent you a message about your listing in {$marketplace->name}.")
             ->line("Listing: {$listing->title}")
             ->line("Message: {$this->message->content}")
-            ->action('View Conversation', route('marketplaces.listings.conversation', [
-                'marketplace' => $marketplace,
-                'listing' => $listing,
-            ]))
+            ->action('View Conversation', route('listings.conversation', $listing))
             ->line('Thank you for using our application!');
     }
 
