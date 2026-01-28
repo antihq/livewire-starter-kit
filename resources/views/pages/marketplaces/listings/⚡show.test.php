@@ -25,7 +25,7 @@ it('displays listing details', function () {
         ->assertSee($listing->description);
 });
 
-it('shows view messages button to listing creator', function () {
+it('shows view conversations button to listing creator', function () {
     actingAs($creator = User::factory()->withPersonalTeam()->create());
 
     $marketplace = Marketplace::factory()->create([
@@ -38,7 +38,7 @@ it('shows view messages button to listing creator', function () {
     ]);
 
     Livewire::test('pages::marketplaces.listings.show', ['marketplace' => $marketplace, 'listing' => $listing])
-        ->assertSee('View messages')
+        ->assertSee('View conversations')
         ->assertDontSee('Send message');
 });
 
@@ -58,7 +58,7 @@ it('shows send message button to non-creator', function () {
 
     Livewire::test('pages::marketplaces.listings.show', ['marketplace' => $marketplace, 'listing' => $listing])
         ->assertSee('Send message')
-        ->assertDontSee('View messages');
+        ->assertDontSee('View conversations');
 });
 
 it('does not show message buttons to guests', function () {
@@ -75,5 +75,5 @@ it('does not show message buttons to guests', function () {
 
     Livewire::test('pages::marketplaces.listings.show', ['marketplace' => $marketplace, 'listing' => $listing])
         ->assertDontSee('Send message')
-        ->assertDontSee('View messages');
+        ->assertDontSee('View conversations');
 });

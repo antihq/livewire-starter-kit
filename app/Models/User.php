@@ -67,6 +67,12 @@ class User extends Authenticatable
         return ! is_null($this->password);
     }
 
+    public function conversations()
+    {
+        return Conversation::where('user_id', $this->id)
+            ->orWhere('listing_creator_id', $this->id);
+    }
+
     /**
      * Get the attributes that should be cast.
      *

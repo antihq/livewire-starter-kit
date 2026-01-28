@@ -26,4 +26,11 @@ class Marketplace extends Model
     {
         return $this->hasMany(Listing::class);
     }
+
+    public function conversations()
+    {
+        return Conversation::whereHas('listing', function ($query) {
+            $query->where('marketplace_id', $this->id);
+        });
+    }
 }
