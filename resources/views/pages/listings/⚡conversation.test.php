@@ -25,6 +25,7 @@ it('allows listing creator to reply', function () {
     ]);
 
     $conversation = Conversation::factory()->create([
+        'team_id' => $creator->currentTeam->id,
         'listing_id' => $listing->id,
         'user_id' => $user->id,
         'listing_creator_id' => $creator->id,
@@ -60,6 +61,7 @@ it('allows message sender to reply', function () {
     ]);
 
     $conversation = Conversation::factory()->create([
+        'team_id' => $creator->currentTeam->id,
         'listing_id' => $listing->id,
         'user_id' => $user->id,
         'listing_creator_id' => $creator->id,

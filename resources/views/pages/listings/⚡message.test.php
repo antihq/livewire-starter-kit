@@ -53,6 +53,7 @@ it('reuses existing conversation', function () {
     ]);
 
     $conversation = $listing->conversations()->create([
+        'team_id' => $creator->currentTeam->id,
         'user_id' => $user->id,
         'listing_creator_id' => $creator->id,
     ]);

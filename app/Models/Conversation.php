@@ -12,6 +12,7 @@ class Conversation extends Model
     use HasFactory;
 
     protected $fillable = [
+        'team_id',
         'listing_id',
         'user_id',
         'listing_creator_id',
@@ -30,6 +31,11 @@ class Conversation extends Model
     public function listingCreator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'listing_creator_id');
+    }
+
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
     }
 
     public function messages(): HasMany

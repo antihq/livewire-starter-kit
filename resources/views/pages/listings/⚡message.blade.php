@@ -30,7 +30,10 @@ new class extends Component
 
         $conversation = $this->listing->conversations()->firstOrCreate(
             ['user_id' => Auth::id()],
-            ['listing_creator_id' => $this->listing->creator_id]
+            [
+                'team_id' => $this->listing->team_id,
+                'listing_creator_id' => $this->listing->creator_id,
+            ]
         );
 
         $message = $conversation->messages()->create([

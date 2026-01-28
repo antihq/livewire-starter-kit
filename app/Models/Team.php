@@ -51,4 +51,9 @@ class Team extends JetstreamTeam
     {
         return $this->hasMany(Marketplace::class);
     }
+
+    public function conversations(): HasMany
+    {
+        return $this->hasMany(Conversation::class);
+    }
 }
