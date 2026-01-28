@@ -59,11 +59,11 @@ new class extends Component
             </div>
 
             <div class="flex gap-4">
-                @if ($this->user)
-                    @if ($this->user->id === $listing->creator_id)
-                        <flux:button href="{{ route('marketplaces.conversations.index', $listing->marketplace) }}" wire:navigate>
-                            View conversations
-                        </flux:button>
+                    @if ($this->user)
+                        @if ($this->user->id === $listing->creator_id)
+                            <flux:button href="{{ route('conversations.index') }}" wire:navigate>
+                                View conversations
+                            </flux:button>
                     @else
                         <flux:button href="{{ route('listings.message', $listing) }}" variant="primary" wire:navigate>
                             Send message

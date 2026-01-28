@@ -1,19 +1,15 @@
 <?php
 
 use App\Models\Conversation;
-use App\Models\Listing;
-use App\Models\Marketplace;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
 new class extends Component
 {
-    public Marketplace $marketplace;
-
     public function mount()
     {
-        $this->authorize('view', $this->marketplace);
+        //
     }
 
     #[Computed]
@@ -32,15 +28,11 @@ new class extends Component
     public function conversations()
     {
         $userId = $this->user->id;
-        $marketplaceId = $this->marketplace->id;
-
-        $listingIds = Listing::where('marketplace_id', $marketplaceId)->pluck('id');
 
         return Conversation::where(function ($query) use ($userId) {
             $query->where('user_id', $userId)
                 ->orWhere('listing_creator_id', $userId);
         })
-            ->whereIn('listing_id', $listingIds)
             ->with(['listing', 'user', 'listingCreator', 'messages' => function ($query) {
                 $query->latest()->limit(1);
             }])
@@ -57,12 +49,12 @@ new class extends Component
 <section class="mx-auto max-w-4xl">
     @if ($this->conversations->isEmpty())
         <div class="flex flex-col items-center justify-center py-12">
-            <flux:heading>No conversations yet in {{ $marketplace->name }}.</flux:heading>
+            <flux:heading>No conversations yet.</flux:heading>
             <flux:text>Start by sending a message on a listing you're interested in.</flux:text>
         </div>
     @else
         <div class="flex flex-wrap justify-between gap-x-6 gap-y-4">
-            <flux:heading size="xl">{{ $marketplace->name }} Conversations</flux:heading>
+            <flux:heading size="xl">Conversations</flux:heading>
         </div>
 
         <div class="mt-8">
@@ -78,7 +70,7 @@ new class extends Component
                     >
                         <div class="flex-1">
                             <flux:heading class="leading-6!">
-                                <a href="{{ route('marketplaces.conversations.show', [$marketplace, $conversation]) }}" wire:navigate>
+                                <a href="{{ route('conversations.show', $conversation) }}" wire:navigate>
                                     {{ $conversation->listing->title }}
                                 </a>
                             </flux:heading>
@@ -89,7 +81,7 @@ new class extends Component
                             </flux:text>
                         </div>
                         <div class="flex shrink-0 items-center gap-x-4">
-                            <flux:button href="{{ route('marketplaces.conversations.show', [$marketplace, $conversation]) }}" variant="ghost" wire:navigate>
+                            <flux:button href="{{ route('conversations.show', $conversation) }}" variant="ghost" wire:navigate>
                                 View
                             </flux:button>
                         </div>

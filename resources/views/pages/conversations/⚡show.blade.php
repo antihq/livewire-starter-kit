@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Conversation;
-use App\Models\Marketplace;
 use App\Notifications\NewMessageNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -10,20 +9,12 @@ use Livewire\Component;
 
 new class extends Component
 {
-    public Marketplace $marketplace;
-
     public Conversation $conversation;
 
     public string $content = '';
 
-    public function mount(Marketplace $marketplace, Conversation $conversation)
+    public function mount(Conversation $conversation)
     {
-        $this->authorize('view', $marketplace);
-
-        if ($conversation->listing->marketplace_id !== $marketplace->id) {
-            abort(404);
-        }
-
         $this->conversation = $conversation->load(['messages.user', 'listing.creator']);
 
         $this->authorize('view', $this->conversation);
@@ -71,7 +62,7 @@ new class extends Component
 
 <section class="mx-auto max-w-4xl space-y-8">
     <div class="flex items-center gap-4">
-        <flux:button href="{{ route('marketplaces.conversations.index', $marketplace) }}" wire:navigate variant="ghost">
+        <flux:button href="{{ route('conversations.index') }}" wire:navigate variant="ghost">
             Back
         </flux:button>
         <flux:heading size="xl">Conversation about {{ $conversation->listing->title }}</flux:heading>
