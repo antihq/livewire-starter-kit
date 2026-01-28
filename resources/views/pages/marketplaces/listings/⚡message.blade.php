@@ -21,7 +21,7 @@ new class extends Component
         $this->authorize('view', $this->marketplace);
         $this->authorize('view', $this->listing);
 
-        if (Auth::id() === $this->listing->user_id) {
+        if (Auth::id() === $this->listing->creator_id) {
             return $this->redirectRoute('marketplaces.listings.conversation', [
                 'marketplace' => $this->marketplace,
                 'listing' => $this->listing,
@@ -37,7 +37,7 @@ new class extends Component
 
         $conversation = $this->listing->conversations()->firstOrCreate(
             ['user_id' => Auth::id()],
-            ['listing_creator_id' => $this->listing->user_id]
+            ['listing_creator_id' => $this->listing->creator_id]
         );
 
         $message = $conversation->messages()->create([
@@ -45,7 +45,7 @@ new class extends Component
             'content' => $this->content,
         ]);
 
-        Notification::send($this->listing->user, new NewMessageNotification($message));
+        Notification::send($this->listing->creator, new NewMessageNotification($message));
 
         session()->flash('status', 'Message sent successfully!');
 

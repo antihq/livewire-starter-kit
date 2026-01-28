@@ -20,8 +20,11 @@ it('displays conversation for participant in marketplace', function () {
     $creator = User::factory()->withPersonalTeam()->create();
 
     $listing = Listing::factory()->create([
+        'team_id' => $creator->currentTeam->id,
+
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -53,8 +56,11 @@ it('displays all messages in conversation', function () {
     $creator = User::factory()->withPersonalTeam()->create();
 
     $listing = Listing::factory()->create([
+        'team_id' => $creator->currentTeam->id,
+
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -90,8 +96,10 @@ it('allows user to send message', function () {
     $creator = User::factory()->withPersonalTeam()->create();
 
     $listing = Listing::factory()->create([
+        'team_id' => $creator->currentTeam->id,
+
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -126,7 +134,8 @@ it('forbids non-participants from viewing conversation', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $user1->id,
+        'team_id' => $user1->currentTeam->id,
+        'creator_id' => $user1->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -150,7 +159,8 @@ it('shows no messages when conversation is empty', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -174,8 +184,10 @@ it('validates message content', function () {
     $creator = User::factory()->withPersonalTeam()->create();
 
     $listing = Listing::factory()->create([
+        'team_id' => $creator->currentTeam->id,
+
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -200,8 +212,10 @@ it('displays back button to marketplace conversations index', function () {
     $creator = User::factory()->withPersonalTeam()->create();
 
     $listing = Listing::factory()->create([
+        'team_id' => $creator->currentTeam->id,
+
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -225,8 +239,10 @@ it('clears content after sending message', function () {
     $creator = User::factory()->withPersonalTeam()->create();
 
     $listing = Listing::factory()->create([
+        'team_id' => $creator->currentTeam->id,
+
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -257,8 +273,11 @@ it('returns 404 if conversation does not belong to marketplace', function () {
     $creator = User::factory()->withPersonalTeam()->create();
 
     $listing = Listing::factory()->create([
+        'team_id' => $creator->currentTeam->id,
+
         'marketplace_id' => $otherMarketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -279,8 +298,10 @@ it('authorizes marketplace view', function () {
     $creator = User::factory()->withPersonalTeam()->create();
 
     $listing = Listing::factory()->create([
+        'team_id' => $creator->currentTeam->id,
+
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([

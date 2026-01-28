@@ -24,7 +24,7 @@ new class extends Component
 
         $userId = Auth::id();
 
-        if ($userId !== $this->listing->user_id) {
+        if ($userId !== $this->listing->creator_id) {
             $conversation = $this->listing->conversationWith(Auth::user());
 
             if ($conversation) {
@@ -49,12 +49,12 @@ new class extends Component
             ->first();
 
         if (! $conversation) {
-            $isCreator = $userId === $this->listing->user_id;
+            $isCreator = $userId === $this->listing->creator_id;
             $inquirerId = $isCreator ? null : $userId;
 
             $conversation = $this->listing->conversations()->create([
                 'user_id' => $inquirerId,
-                'listing_creator_id' => $this->listing->user_id,
+                'listing_creator_id' => $this->listing->creator_id,
             ]);
         }
 

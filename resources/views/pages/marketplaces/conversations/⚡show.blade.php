@@ -24,7 +24,7 @@ new class extends Component
             abort(404);
         }
 
-        $this->conversation = $conversation->load(['messages.user', 'listing.user']);
+        $this->conversation = $conversation->load(['messages.user', 'listing.creator']);
 
         $this->authorize('view', $this->conversation);
     }

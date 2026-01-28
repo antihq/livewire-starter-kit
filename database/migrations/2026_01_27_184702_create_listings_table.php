@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('team_id')->index();
             $table->foreignId('marketplace_id')->index();
-            $table->foreignId('user_id')->index();
+            $table->foreignId('creator_id')->index();
             $table->string('title');
             $table->text('description');
             $table->timestamps();

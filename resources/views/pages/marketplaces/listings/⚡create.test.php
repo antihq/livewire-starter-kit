@@ -25,5 +25,5 @@ it('can create listings', function () {
     expect($marketplace->fresh()->listings)->toHaveCount(1);
     expect($marketplace->fresh()->listings->first()->title)->toEqual('Test Listing');
     expect($marketplace->fresh()->listings->first()->description)->toEqual('This is a test description');
-    expect($marketplace->fresh()->listings->first()->user_id)->toEqual($user->id);
+    expect($marketplace->fresh()->listings->first()->creator_id)->toEqual($user->id);
 });

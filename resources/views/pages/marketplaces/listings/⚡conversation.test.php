@@ -21,7 +21,8 @@ it('displays conversation for listing creator', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -52,7 +53,8 @@ it('displays conversation for message sender', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -83,7 +85,8 @@ it('allows listing creator to reply', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -117,7 +120,8 @@ it('allows message sender to reply', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -149,7 +153,8 @@ it('displays all messages in conversation', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -186,7 +191,8 @@ it('clears content after sending message', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     Conversation::factory()->create([
@@ -212,7 +218,8 @@ it('shows no conversation message when none exists', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     Livewire::test('pages::marketplaces.listings.conversation', ['marketplace' => $marketplace, 'listing' => $listing])

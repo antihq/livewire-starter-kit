@@ -15,7 +15,8 @@ class Listing extends Model
         'title',
         'description',
         'marketplace_id',
-        'user_id',
+        'team_id',
+        'creator_id',
     ];
 
     public function marketplace(): BelongsTo
@@ -23,9 +24,9 @@ class Listing extends Model
         return $this->belongsTo(Marketplace::class);
     }
 
-    public function user(): BelongsTo
+    public function creator(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'creator_id');
     }
 
     public function conversations(): HasMany

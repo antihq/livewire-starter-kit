@@ -19,7 +19,8 @@ it('displays message form for non-creator', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     Livewire::test('pages::marketplaces.listings.message', ['marketplace' => $marketplace, 'listing' => $listing])
@@ -36,7 +37,8 @@ it('redirects listing creator to conversation view', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $user->id,
+        'team_id' => $user->currentTeam->id,
+        'creator_id' => $user->id,
     ]);
 
     Livewire::test('pages::marketplaces.listings.message', ['marketplace' => $marketplace, 'listing' => $listing])
@@ -54,7 +56,8 @@ it('creates conversation and message on submit', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     Notification::fake();
@@ -82,7 +85,8 @@ it('requires message content', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     Livewire::test('pages::marketplaces.listings.message', ['marketplace' => $marketplace, 'listing' => $listing])
@@ -102,7 +106,8 @@ it('reuses existing conversation', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = $listing->conversations()->create([

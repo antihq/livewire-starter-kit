@@ -31,7 +31,8 @@ new class extends Component
         $listing = $this->marketplace->listings()->create([
             'title' => $this->title,
             'description' => $this->description,
-            'user_id' => Auth::id(),
+            'creator_id' => Auth::id(),
+            'team_id' => $this->team->id,
         ]);
 
         return $this->redirectRoute('marketplaces.listings.show', [$this->marketplace, $listing]);

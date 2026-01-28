@@ -16,7 +16,8 @@ it('displays listing details', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $user->id,
+        'team_id' => $user->currentTeam->id,
+        'creator_id' => $user->id,
     ]);
 
     Livewire::test('pages::marketplaces.listings.show', ['marketplace' => $marketplace, 'listing' => $listing])
@@ -34,7 +35,8 @@ it('shows view conversations button to listing creator', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     Livewire::test('pages::marketplaces.listings.show', ['marketplace' => $marketplace, 'listing' => $listing])
@@ -53,7 +55,8 @@ it('shows send message button to non-creator', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     Livewire::test('pages::marketplaces.listings.show', ['marketplace' => $marketplace, 'listing' => $listing])
@@ -70,7 +73,8 @@ it('does not show message buttons to guests', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     Livewire::test('pages::marketplaces.listings.show', ['marketplace' => $marketplace, 'listing' => $listing])

@@ -33,7 +33,7 @@ new class extends Component
     #[Computed]
     public function creator()
     {
-        return $this->listing->user;
+        return $this->listing->creator;
     }
 }
 ?>
@@ -64,7 +64,7 @@ new class extends Component
 
             <div class="flex gap-4">
                 @if ($this->user)
-                    @if ($this->user->id === $listing->user_id)
+                    @if ($this->user->id === $listing->creator_id)
                         <flux:button href="{{ route('marketplaces.conversations.index', $marketplace) }}" wire:navigate>
                             View conversations
                         </flux:button>

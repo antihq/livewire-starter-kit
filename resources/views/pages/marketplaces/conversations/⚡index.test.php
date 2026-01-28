@@ -24,12 +24,14 @@ it('displays user conversations for marketplace', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $otherListing = Listing::factory()->create([
         'marketplace_id' => $otherMarketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation = Conversation::factory()->create([
@@ -86,12 +88,14 @@ it('displays conversations sorted by most recent message', function () {
 
     $listing1 = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $listing2 = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $conversation1 = Conversation::factory()->create([
@@ -137,12 +141,14 @@ it('only displays conversations where user is participant in marketplace', funct
 
     $listing1 = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $listing2 = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
-        'user_id' => $creator->id,
+        'team_id' => $creator->currentTeam->id,
+        'creator_id' => $creator->id,
     ]);
 
     $userConversation = Conversation::factory()->create([
@@ -186,8 +192,9 @@ it('displays listing title and other user name', function () {
 
     $listing = Listing::factory()->create([
         'marketplace_id' => $marketplace->id,
+        'team_id' => $creator->currentTeam->id,
         'title' => 'Test Listing',
-        'user_id' => $creator->id,
+        'creator_id' => $creator->id,
     ]);
 
     Conversation::factory()->create([
