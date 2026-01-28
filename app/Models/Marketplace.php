@@ -15,11 +15,17 @@ class Marketplace extends Model
     protected $fillable = [
         'name',
         'team_id',
+        'creator_id',
     ];
 
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
+    }
+
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'creator_id');
     }
 
     public function listings(): HasMany

@@ -21,6 +21,7 @@ new class extends Component
 
         $marketplace = $team->marketplaces()->create([
             'name' => $this->name,
+            'creator_id' => $this->user->id,
         ]);
 
         return $this->redirectRoute('marketplaces.show', $marketplace);

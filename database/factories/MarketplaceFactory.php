@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -15,6 +16,7 @@ class MarketplaceFactory extends Factory
         return [
             'team_id' => Team::factory(),
             'name' => fake()->words(3, true),
+            'creator_id' => User::factory(),
         ];
     }
 }

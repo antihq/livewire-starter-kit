@@ -16,6 +16,9 @@ it('can create marketplaces', function () {
         ->call('create')
         ->assertHasNoErrors();
 
+    $marketplace = $user->currentTeam->marketplaces->first();
+
     expect($user->currentTeam->marketplaces)->toHaveCount(1);
-    expect($user->currentTeam->marketplaces->first()->name)->toEqual('Test Marketplace');
+    expect($marketplace->name)->toEqual('Test Marketplace');
+    expect($marketplace->creator_id)->toEqual($user->id);
 });
