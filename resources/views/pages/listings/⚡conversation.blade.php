@@ -56,6 +56,7 @@ new class extends Component
 
         $message = $conversation->messages()->create([
             'user_id' => $userId,
+            'team_id' => $conversation->team_id,
             'content' => $this->content,
         ]);
 

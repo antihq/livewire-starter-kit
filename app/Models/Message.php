@@ -13,6 +13,7 @@ class Message extends Model
     protected $fillable = [
         'conversation_id',
         'user_id',
+        'team_id',
         'content',
     ];
 
@@ -24,5 +25,10 @@ class Message extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function team(): BelongsTo
+    {
+        return $this->belongsTo(Team::class);
     }
 }

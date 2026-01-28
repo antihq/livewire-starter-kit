@@ -13,9 +13,12 @@ class MessageFactory extends Factory
 
     public function definition(): array
     {
+        $conversation = Conversation::factory()->create();
+
         return [
-            'conversation_id' => Conversation::factory(),
+            'conversation_id' => $conversation->id,
             'user_id' => User::factory(),
+            'team_id' => $conversation->team_id,
             'content' => fake()->paragraph(),
         ];
     }
