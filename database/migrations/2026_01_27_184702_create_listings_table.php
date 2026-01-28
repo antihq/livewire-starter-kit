@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('marketplace_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('team_id')->index();
+            $table->foreignId('marketplace_id')->index();
+            $table->foreignId('user_id')->index();
             $table->string('title');
             $table->text('description');
             $table->timestamps();
