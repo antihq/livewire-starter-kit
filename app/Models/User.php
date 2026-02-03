@@ -67,6 +67,11 @@ class User extends Authenticatable
         return ! is_null($this->password);
     }
 
+    public function sshKeys(): HasMany
+    {
+        return $this->hasMany(SshKey::class, 'creator_id');
+    }
+
     /**
      * Get the attributes that should be cast.
      *

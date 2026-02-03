@@ -4,7 +4,8 @@ use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-new class extends Component {
+new class extends Component
+{
     public ?int $team = null;
 
     public function mount(): void
@@ -97,6 +98,9 @@ new class extends Component {
                     wire:navigate
                 >
                     Members
+                </flux:menu.item>
+                <flux:menu.item :href="route('ssh-keys.index')" icon="key" icon:variant="micro" wire:navigate>
+                    SSH Keys
                 </flux:menu.item>
                 <flux:menu.item :href="route('teams.create')" icon="plus" icon:variant="micro" wire:navigate>
                     Create new team

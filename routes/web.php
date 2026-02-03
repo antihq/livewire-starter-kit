@@ -25,6 +25,9 @@ Route::middleware(['auth'])->group(function () {
     Route::livewire('teams/{team}', 'pages::teams.show')->name('teams.edit');
     Route::livewire('teams/{team}/members', 'pages::teams.members.index')->name('teams.members.index');
 
+    Route::livewire('ssh-keys', 'pages::ssh-keys.index')->name('ssh-keys.index');
+    Route::livewire('ssh-keys/create', 'pages::ssh-keys.create')->name('ssh-keys.create');
+
     Route::redirect('account', 'settings/profile');
 
     Route::livewire('account/profile', 'pages::account.profile')->name('profile.edit');
