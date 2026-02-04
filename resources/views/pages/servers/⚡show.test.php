@@ -14,7 +14,7 @@ it('allows deleting server from show page', function () {
         'creator_id' => $user->id,
     ]);
 
-    Livewire::test('pages::servers.show', ['server' => $server->id])
+    Livewire::test('pages::servers.show', ['server' => $server])
         ->call('delete')
         ->assertRedirect(route('servers.index'));
 

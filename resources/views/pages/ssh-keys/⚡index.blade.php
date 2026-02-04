@@ -73,6 +73,13 @@ new class extends Component
                         <flux:table.cell>
                             <flux:button
                                 variant="ghost"
+                                :href="route('ssh-keys.edit', $key->id)"
+                                wire:navigate
+                            >
+                                Edit Servers
+                            </flux:button>
+                            <flux:button
+                                variant="ghost"
                                 wire:confirm="Are you sure you want to delete this SSH key?"
                                 wire:click="delete({{ $key->id }})"
                             >

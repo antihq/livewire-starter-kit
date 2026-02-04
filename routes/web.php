@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::livewire('ssh-keys', 'pages::ssh-keys.index')->name('ssh-keys.index');
     Route::livewire('ssh-keys/create', 'pages::ssh-keys.create')->name('ssh-keys.create');
+    Route::livewire('ssh-keys/{sshKey}/edit', 'pages::ssh-keys.edit')->name('ssh-keys.edit');
 
     Route::livewire('servers', 'pages::servers.index')->name('servers.index');
     Route::livewire('servers/create', 'pages::servers.create')->name('servers.create');

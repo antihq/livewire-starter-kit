@@ -8,23 +8,12 @@ use Livewire\Component;
 
 new class extends Component
 {
-    public int $serverId;
+    public Server $server;
 
     #[Computed]
     public function user(): User
     {
         return Auth::user();
-    }
-
-    #[Computed]
-    public function server(): Server
-    {
-        return $this->user->currentTeam->servers()->findOrFail($this->serverId);
-    }
-
-    public function mount(int $server): void
-    {
-        $this->serverId = $server;
     }
 
     public function delete(): void
@@ -38,7 +27,7 @@ new class extends Component
 
 <div class="mx-auto max-w-lg space-y-8">
     <div class="flex items-center justify-between">
-        <flux:heading size="lg">{{ $this->server->name }}</flux:heading>
+        <flux:heading size="lg">{{ $server->name }}</flux:heading>
         <div class="flex gap-2">
             <flux:button
                 variant="danger"
@@ -55,22 +44,22 @@ new class extends Component
     <div class="space-y-4">
         <div>
             <flux:text class="text-sm font-medium text-zinc-500">Public IP</flux:text>
-            <flux:text class="font-mono">{{ $this->server->public_ip }}</flux:text>
+            <flux:text class="font-mono">{{ $server->public_ip }}</flux:text>
         </div>
 
         <div>
             <flux:text class="text-sm font-medium text-zinc-500">Created By</flux:text>
-            <flux:text>{{ $this->server->creator?->name ?? 'Unknown' }}</flux:text>
+            <flux:text>{{ $server->creator?->name ?? 'Unknown' }}</flux:text>
         </div>
 
         <div>
             <flux:text class="text-sm font-medium text-zinc-500">Created At</flux:text>
-            <flux:text>{{ $this->server->created_at->diffForHumans() }}</flux:text>
+            <flux:text>{{ $server->created_at->diffForHumans() }}</flux:text>
         </div>
     </div>
 
-    @if ($this->server->sshKeys->isNotEmpty())
-        <flux:heading size="md">SSH Keys ({{ $this->server->sshKeys->count() }})</flux:heading>
+    @if ($server->sshKeys->isNotEmpty())
+        <flux:heading size="md">SSH Keys ({{ $server->sshKeys->count() }})</flux:heading>
 
         <flux:table>
             <flux:table.columns>
@@ -78,7 +67,7 @@ new class extends Component
                 <flux:table.column>Created By</flux:table.column>
             </flux:table.columns>
             <flux:table.rows>
-                @foreach ($this->server->sshKeys as $sshKey)
+                @foreach ($server->sshKeys as $sshKey)
                     <flux:table.row :key="$sshKey->id">
                         <flux:table.cell>{{ $sshKey->name }}</flux:table.cell>
                         <flux:table.cell>{{ $sshKey->creator?->name ?? 'Unknown' }}</flux:table.cell>

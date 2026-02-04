@@ -20,6 +20,12 @@ class SshKeyPolicy
         return $user->currentTeam && $user->belongsToTeam($user->currentTeam);
     }
 
+    public function update(User $user, SshKey $sshKey): bool
+    {
+        return $sshKey->team_id === $user->currentTeam?->id &&
+               $user->belongsToTeam($sshKey->team);
+    }
+
     public function delete(User $user, SshKey $sshKey): bool
     {
         return $sshKey->team_id === $user->currentTeam?->id &&
