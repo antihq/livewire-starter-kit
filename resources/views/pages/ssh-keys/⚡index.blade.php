@@ -39,6 +39,7 @@ new class extends Component
 
         $this->authorize('delete', $sshKey);
 
+        $sshKey->servers()->detach();
         $sshKey->delete();
     }
 };
