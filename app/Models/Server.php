@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class SshKey extends Model
+class Server extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'public_key',
+        'public_ip',
         'creator_id',
     ];
 
@@ -27,8 +27,8 @@ class SshKey extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function servers(): BelongsToMany
+    public function sshKeys(): BelongsToMany
     {
-        return $this->belongsToMany(Server::class);
+        return $this->belongsToMany(SshKey::class);
     }
 }

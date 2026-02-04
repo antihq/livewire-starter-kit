@@ -28,6 +28,10 @@ Route::middleware(['auth'])->group(function () {
     Route::livewire('ssh-keys', 'pages::ssh-keys.index')->name('ssh-keys.index');
     Route::livewire('ssh-keys/create', 'pages::ssh-keys.create')->name('ssh-keys.create');
 
+    Route::livewire('servers', 'pages::servers.index')->name('servers.index');
+    Route::livewire('servers/create', 'pages::servers.create')->name('servers.create');
+    Route::livewire('servers/{server}', 'pages::servers.show')->name('servers.show');
+
     Route::redirect('account', 'settings/profile');
 
     Route::livewire('account/profile', 'pages::account.profile')->name('profile.edit');

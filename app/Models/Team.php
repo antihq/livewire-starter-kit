@@ -40,6 +40,11 @@ class Team extends JetstreamTeam
         return $this->hasMany(SshKey::class);
     }
 
+    public function servers(): HasMany
+    {
+        return $this->hasMany(Server::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
