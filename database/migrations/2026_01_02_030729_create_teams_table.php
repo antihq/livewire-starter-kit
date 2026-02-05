@@ -13,6 +13,8 @@ return new class extends Migration
             $table->foreignId('user_id')->index();
             $table->string('name');
             $table->boolean('personal_team');
+            $table->text('public_key')->nullable();
+            $table->text('private_key')->nullable();
             $table->timestamps();
         });
     }

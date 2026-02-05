@@ -22,6 +22,9 @@ class Team extends JetstreamTeam
     protected $fillable = [
         'name',
         'personal_team',
+        'public_key',
+        'private_key',
+        'user_id',
     ];
 
     /**
@@ -33,6 +36,11 @@ class Team extends JetstreamTeam
         'created' => TeamCreated::class,
         'updated' => TeamUpdated::class,
         'deleted' => TeamDeleted::class,
+    ];
+
+    protected $hidden = [
+        'public_key',
+        'private_key',
     ];
 
     public function sshKeys(): HasMany
@@ -74,6 +82,7 @@ class Team extends JetstreamTeam
     {
         return [
             'personal_team' => 'boolean',
+            'private_key' => 'encrypted',
         ];
     }
 }

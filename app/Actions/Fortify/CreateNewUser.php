@@ -5,6 +5,7 @@ namespace App\Actions\Fortify;
 use App\Models\Team;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
+use App\Support\SecureShellKey;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -38,10 +39,14 @@ class CreateNewUser implements CreatesNewUsers
 
     protected function createTeam(User $user): void
     {
+        $keypair = SecureShellKey::make();
+
         $user->ownedTeams()->save(Team::forceCreate([
             'user_id' => $user->id,
             'name' => 'Personal',
             'personal_team' => true,
+            'public_key' => $keypair->publicKey,
+            'private_key' => $keypair->privateKey,
         ]));
     }
 }
