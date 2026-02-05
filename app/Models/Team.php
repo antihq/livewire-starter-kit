@@ -73,6 +73,11 @@ class Team extends JetstreamTeam
         return $this->hasMany(Cronjob::class);
     }
 
+    public function daemons(): HasMany
+    {
+        return $this->hasMany(Daemon::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *

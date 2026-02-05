@@ -99,5 +99,10 @@ new class extends Component
         <flux:button :href="route('servers.cronjobs.index', $server->id)" variant="ghost" wire:navigate>View Cronjobs ({{ $server->cronjobs->count() }})</flux:button>
     </div>
 
+    <div class="flex items-center justify-between">
+        <flux:heading size="md">Daemons</flux:heading>
+        <flux:button :href="route('servers.daemons.index', $server->id)" variant="ghost" wire:navigate>View Daemons ({{ $server->daemons->count() }})</flux:button>
+    </div>
+
     <flux:button variant="ghost" :href="route('servers.index')" wire:navigate>Back to Servers</flux:button>
 </div>
