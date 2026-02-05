@@ -41,6 +41,10 @@ Route::middleware(['auth'])->group(function () {
     Route::livewire('servers/{server}/database-users/create', 'pages::servers.database-users.create')->name('servers.database-users.create');
     Route::livewire('servers/{server}/database-users', 'pages::servers.database-users.index')->name('servers.database-users.index');
 
+    Route::livewire('servers/{server}/cronjobs/create', 'pages::servers.cronjobs.create')->name('servers.cronjobs.create');
+    Route::livewire('servers/{server}/cronjobs', 'pages::servers.cronjobs.index')->name('servers.cronjobs.index');
+    Route::livewire('servers/{server}/cronjobs/{cronjob}/edit', 'pages::servers.cronjobs.edit')->name('servers.cronjobs.edit');
+
     Route::livewire('sites/{site}', 'pages::sites.show')->name('sites.show');
 
     Route::redirect('account', 'settings/profile');
