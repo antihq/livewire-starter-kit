@@ -15,6 +15,7 @@ class Server extends Model
     protected $fillable = [
         'name',
         'public_ip',
+        'status',
         'creator_id',
     ];
 
@@ -61,5 +62,10 @@ class Server extends Model
     public function firewallRules(): HasMany
     {
         return $this->hasMany(FirewallRule::class);
+    }
+
+    public function markAsProvisioned(): void
+    {
+        $this->update(['status' => 'provisioned']);
     }
 }

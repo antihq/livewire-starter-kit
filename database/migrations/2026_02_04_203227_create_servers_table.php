@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('creator_id')->index();
             $table->string('name');
             $table->string('public_ip');
+            $table->string('status', 25)->default('pending')->after('public_ip');
             $table->timestamps();
         });
     }
