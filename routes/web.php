@@ -49,6 +49,10 @@ Route::middleware(['auth'])->group(function () {
     Route::livewire('servers/{server}/daemons', 'pages::servers.daemons.index')->name('servers.daemons.index');
     Route::livewire('daemons/{daemon}/edit', 'pages::daemons.edit')->name('daemons.edit');
 
+    Route::livewire('servers/{server}/firewall-rules/create', 'pages::servers.firewall-rules.create')->name('servers.firewall-rules.create');
+    Route::livewire('servers/{server}/firewall-rules', 'pages::servers.firewall-rules.index')->name('servers.firewall-rules.index');
+    Route::livewire('firewall-rules/{firewallRule}/edit', 'pages::firewall-rules.edit')->name('firewall-rules.edit');
+
     Route::livewire('sites/{site}', 'pages::sites.show')->name('sites.show');
 
     Route::redirect('account', 'settings/profile');

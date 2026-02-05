@@ -57,4 +57,9 @@ class Server extends Model
     {
         return $this->hasMany(Daemon::class);
     }
+
+    public function firewallRules(): HasMany
+    {
+        return $this->hasMany(FirewallRule::class);
+    }
 }

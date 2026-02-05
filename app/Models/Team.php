@@ -78,6 +78,11 @@ class Team extends JetstreamTeam
         return $this->hasMany(Daemon::class);
     }
 
+    public function firewallRules(): HasMany
+    {
+        return $this->hasMany(FirewallRule::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
