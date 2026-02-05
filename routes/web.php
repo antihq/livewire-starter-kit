@@ -35,6 +35,9 @@ Route::middleware(['auth'])->group(function () {
     Route::livewire('servers/{server}/sites/create', 'pages::servers.sites.create')->name('servers.sites.create');
     Route::livewire('servers/{server}/sites', 'pages::servers.sites.index')->name('servers.sites.index');
 
+    Route::livewire('servers/{server}/databases/create', 'pages::servers.databases.create')->name('servers.databases.create');
+    Route::livewire('servers/{server}/databases', 'pages::servers.databases.index')->name('servers.databases.index');
+
     Route::livewire('sites/{site}', 'pages::sites.show')->name('sites.show');
 
     Route::redirect('account', 'settings/profile');
