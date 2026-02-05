@@ -22,7 +22,7 @@ it('prepopulates form with existing cronjob values', function () {
         'creator_id' => $user->id,
     ]);
 
-    Livewire::test('pages::servers.cronjobs.edit', ['server' => $server, 'cronjob' => $cronjob])
+    Livewire::test('pages::cronjobs.edit', ['cronjob' => $cronjob])
         ->assertOk()
         ->assertSet('command', 'php /var/www/html/artisan schedule:run')
         ->assertSet('systemUser', 'fuse')
@@ -46,7 +46,7 @@ it('can update cronjob command', function () {
         'creator_id' => $user->id,
     ]);
 
-    Livewire::test('pages::servers.cronjobs.edit', ['server' => $server, 'cronjob' => $cronjob])
+    Livewire::test('pages::cronjobs.edit', ['cronjob' => $cronjob])
         ->set('command', 'php /var/www/html/artisan backup:run')
         ->call('update')
         ->assertRedirect(route('servers.cronjobs.index', $server->id));
@@ -71,7 +71,7 @@ it('can update cronjob user', function () {
         'creator_id' => $user->id,
     ]);
 
-    Livewire::test('pages::servers.cronjobs.edit', ['server' => $server, 'cronjob' => $cronjob])
+    Livewire::test('pages::cronjobs.edit', ['cronjob' => $cronjob])
         ->set('systemUser', 'root')
         ->call('update')
         ->assertRedirect(route('servers.cronjobs.index', $server->id));
@@ -96,7 +96,7 @@ it('can update cronjob frequency', function () {
         'creator_id' => $user->id,
     ]);
 
-    Livewire::test('pages::servers.cronjobs.edit', ['server' => $server, 'cronjob' => $cronjob])
+    Livewire::test('pages::cronjobs.edit', ['cronjob' => $cronjob])
         ->set('frequency', 'hourly')
         ->call('update')
         ->assertRedirect(route('servers.cronjobs.index', $server->id));
@@ -121,7 +121,7 @@ it('can update cronjob with custom frequency', function () {
         'creator_id' => $user->id,
     ]);
 
-    Livewire::test('pages::servers.cronjobs.edit', ['server' => $server, 'cronjob' => $cronjob])
+    Livewire::test('pages::cronjobs.edit', ['cronjob' => $cronjob])
         ->set('frequency', 'custom')
         ->set('custom_cron', '0 0 * * *')
         ->call('update')
@@ -149,7 +149,7 @@ it('clears custom_cron when switching from custom to predefined frequency', func
         'creator_id' => $user->id,
     ]);
 
-    Livewire::test('pages::servers.cronjobs.edit', ['server' => $server, 'cronjob' => $cronjob])
+    Livewire::test('pages::cronjobs.edit', ['cronjob' => $cronjob])
         ->set('frequency', 'daily')
         ->call('update')
         ->assertRedirect(route('servers.cronjobs.index', $server->id));
@@ -175,7 +175,7 @@ it('validates required fields on update', function () {
         'creator_id' => $user->id,
     ]);
 
-    Livewire::test('pages::servers.cronjobs.edit', ['server' => $server, 'cronjob' => $cronjob])
+    Livewire::test('pages::cronjobs.edit', ['cronjob' => $cronjob])
         ->set('command', '')
         ->call('update')
         ->assertHasErrors(['command']);

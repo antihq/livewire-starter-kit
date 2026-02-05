@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::livewire('servers/{server}/cronjobs/create', 'pages::servers.cronjobs.create')->name('servers.cronjobs.create');
     Route::livewire('servers/{server}/cronjobs', 'pages::servers.cronjobs.index')->name('servers.cronjobs.index');
-    Route::livewire('servers/{server}/cronjobs/{cronjob}/edit', 'pages::servers.cronjobs.edit')->name('servers.cronjobs.edit');
+    Route::livewire('cronjobs/{cronjob}/edit', 'pages::cronjobs.edit')->name('cronjobs.edit');
 
     Route::livewire('sites/{site}', 'pages::sites.show')->name('sites.show');
 

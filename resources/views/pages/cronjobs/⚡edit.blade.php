@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Cronjob;
-use App\Models\Server;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
@@ -10,8 +9,6 @@ use Livewire\Component;
 
 new class extends Component
 {
-    public Server $server;
-
     public Cronjob $cronjob;
 
     #[Validate('required|string|max:1000')]
@@ -50,7 +47,6 @@ new class extends Component
     public function mount(): void
     {
         $this->authorize('update', $this->cronjob);
-        $this->authorize('view', $this->server);
 
         $this->command = $this->cronjob->command;
         $this->systemUser = $this->cronjob->user;
@@ -75,7 +71,7 @@ new class extends Component
             'custom_cron' => $this->frequency === 'custom' ? $this->custom_cron : null,
         ]);
 
-        $this->redirectRoute('servers.cronjobs.index', $this->server->id, navigate: true);
+        $this->redirectRoute('servers.cronjobs.index', $this->cronjob->server_id, navigate: true);
     }
 };
 ?>
@@ -115,7 +111,7 @@ new class extends Component
 
         <div class="flex gap-3">
             <flux:spacer />
-            <flux:button variant="ghost" :href="route('servers.cronjobs.index', $server->id)" wire:navigate>Cancel</flux:button>
+            <flux:button variant="ghost" :href="route('servers.cronjobs.index', $cronjob->server_id)" wire:navigate>Cancel</flux:button>
             <flux:button variant="primary" type="submit">Save Changes</flux:button>
         </div>
     </form>

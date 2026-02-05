@@ -86,7 +86,7 @@ new class extends Component
                             <div class="flex gap-2">
                                 <flux:button
                                     variant="ghost"
-                                    :href="route('servers.cronjobs.edit', [$server->id, $cronjob->id])"
+                                    :href="route('cronjobs.edit', $cronjob->id)"
                                     wire:navigate
                                 >
                                     Edit
