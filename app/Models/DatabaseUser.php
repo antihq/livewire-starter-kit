@@ -7,15 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Database extends Model
+class DatabaseUser extends Model
 {
     use HasFactory;
 
+    protected $table = 'database_users';
+
     protected $fillable = [
-        'name',
+        'username',
+        'password',
         'server_id',
         'team_id',
         'creator_id',
+    ];
+
+    protected $hidden = [
+        'password',
     ];
 
     public function team(): BelongsTo
@@ -33,8 +40,15 @@ class Database extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function databaseUsers(): BelongsToMany
+    public function databases(): BelongsToMany
     {
-        return $this->belongsToMany(DatabaseUser::class, 'database_user');
+        return $this->belongsToMany(Database::class, 'database_user');
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'password' => 'encrypted',
+        ];
     }
 }

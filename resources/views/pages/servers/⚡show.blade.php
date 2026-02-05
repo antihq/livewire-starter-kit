@@ -89,5 +89,10 @@ new class extends Component
         <flux:button :href="route('servers.databases.index', $server->id)" variant="ghost" wire:navigate>View Databases ({{ $server->databases->count() }})</flux:button>
     </div>
 
+    <div class="flex items-center justify-between">
+        <flux:heading size="md">Database Users</flux:heading>
+        <flux:button :href="route('servers.database-users.index', $server->id)" variant="ghost" wire:navigate>View Database Users ({{ $server->databaseUsers->count() }})</flux:button>
+    </div>
+
     <flux:button variant="ghost" :href="route('servers.index')" wire:navigate>Back to Servers</flux:button>
 </div>
