@@ -45,6 +45,11 @@ class Team extends JetstreamTeam
         return $this->hasMany(Server::class);
     }
 
+    public function sites(): HasMany
+    {
+        return $this->hasMany(Site::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *

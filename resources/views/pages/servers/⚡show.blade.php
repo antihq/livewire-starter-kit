@@ -79,5 +79,10 @@ new class extends Component
         <flux:text class="text-zinc-500">No SSH keys attached to this server.</flux:text>
     @endif
 
+    <div class="flex items-center justify-between">
+        <flux:heading size="md">Sites</flux:heading>
+        <flux:button :href="route('servers.sites.index', $server->id)" variant="ghost" wire:navigate>View Sites ({{ $server->sites->count() }})</flux:button>
+    </div>
+
     <flux:button variant="ghost" :href="route('servers.index')" wire:navigate>Back to Servers</flux:button>
 </div>
