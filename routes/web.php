@@ -29,6 +29,10 @@ Route::middleware(['auth'])->group(function () {
     Route::livewire('ssh-keys/create', 'pages::ssh-keys.create')->name('ssh-keys.create');
     Route::livewire('ssh-keys/{sshKey}/edit', 'pages::ssh-keys.edit')->name('ssh-keys.edit');
 
+    Route::livewire('backup-disks', 'pages::backup-disks.index')->name('backup-disks.index');
+    Route::livewire('backup-disks/create', 'pages::backup-disks.create')->name('backup-disks.create');
+    Route::livewire('backup-disks/{backupDisk}/edit', 'pages::backup-disks.edit')->name('backup-disks.edit');
+
     Route::livewire('servers', 'pages::servers.index')->name('servers.index');
     Route::livewire('servers/create', 'pages::servers.create')->name('servers.create');
     Route::livewire('servers/{server}', 'pages::servers.show')->name('servers.show');

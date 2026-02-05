@@ -102,6 +102,9 @@ new class extends Component
                 <flux:menu.item :href="route('ssh-keys.index')" icon="key" icon:variant="micro" wire:navigate>
                     SSH Keys
                 </flux:menu.item>
+                <flux:menu.item :href="route('backup-disks.index')" icon="cloud-arrow-up" icon:variant="micro" wire:navigate>
+                    Backup Disks
+                </flux:menu.item>
                 <flux:menu.item :href="route('servers.index')" icon="server" icon:variant="micro" wire:navigate>
                     Servers
                 </flux:menu.item>

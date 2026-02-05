@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\User;
-use App\Support\SecureShellKey;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,14 +17,12 @@ class TeamFactory extends Factory
      */
     public function definition(): array
     {
-        $keypair = SecureShellKey::make();
-
         return [
             'name' => $this->faker->unique()->company(),
             'user_id' => User::factory(),
             'personal_team' => true,
-            'public_key' => $keypair->publicKey,
-            'private_key' => $keypair->privateKey,
+            'public_key' => 'public-key',
+            'private_key' => 'private-key',
         ];
     }
 }

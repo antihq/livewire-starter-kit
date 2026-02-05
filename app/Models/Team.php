@@ -83,6 +83,11 @@ class Team extends JetstreamTeam
         return $this->hasMany(FirewallRule::class);
     }
 
+    public function backupDisks(): HasMany
+    {
+        return $this->hasMany(BackupDisk::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
