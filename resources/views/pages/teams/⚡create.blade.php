@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Team;
+use App\Support\SecureShellKey;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Events\AddingTeam;
 use Livewire\Attributes\Computed;
@@ -20,9 +21,13 @@ new class extends Component
 
         AddingTeam::dispatch($this->user);
 
+        $keypair = SecureShellKey::make();
+
         $this->user->switchTeam($this->user->ownedTeams()->create([
             'name' => $this->name,
             'personal_team' => false,
+            'public_key' => $keypair->publicKey,
+            'private_key' => $keypair->privateKey,
         ]));
 
         return $this->redirectRoute('dashboard');

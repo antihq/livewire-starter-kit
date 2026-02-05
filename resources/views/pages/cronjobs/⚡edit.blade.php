@@ -94,7 +94,7 @@ new class extends Component
             required
         />
 
-        <flux:select wire:model="frequency" label="Frequency" required>
+        <flux:select wire:model.live="frequency" label="Frequency" required>
             @foreach ($this->frequencyOptions as $value => $label)
                 <flux:select.option :value="$value">{{ $label }}</flux:select.option>
             @endforeach
