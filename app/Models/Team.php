@@ -88,6 +88,33 @@ class Team extends JetstreamTeam
         return $this->hasMany(BackupDisk::class);
     }
 
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function privateKeyPath(): string
+    {
+        $tempDir = storage_path('app/ssh-temp');
+
+        if (! is_dir($tempDir)) {
+            mkdir($tempDir, 0755, true);
+        }
+
+        $path = $tempDir.'/team-'.$this->id;
+        file_put_contents($path, $this->private_key);
+        chmod($path, 0600);
+
+        return $path;
+    }
+
+    public function cleanupPrivateKeyPath(string $path): void
+    {
+        if (file_exists($path)) {
+            @unlink($path);
+        }
+    }
+
     /**
      * Get the attributes that should be cast.
      *

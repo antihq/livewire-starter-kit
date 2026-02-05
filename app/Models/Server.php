@@ -64,8 +64,54 @@ class Server extends Model
         return $this->hasMany(FirewallRule::class);
     }
 
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
+
     public function markAsProvisioned(): void
     {
         $this->update(['status' => 'provisioned']);
+    }
+
+    public function run(\App\Scripts\Script $script, array $options = []): Task
+    {
+        $options['timeout'] ??= $script->timeout();
+
+        return $this->tasks()->create([
+            'team_id' => $this->team_id,
+            'name' => $script->name(),
+            'user' => $script->sshAs,
+            'options' => $options,
+            'script' => (string) $script,
+            'output' => '',
+        ])->run();
+    }
+
+    public function runInBackground(\App\Scripts\Script $script, array $options = []): Task
+    {
+        return $this->tasks()->create([
+            'team_id' => $this->team_id,
+            'name' => $script->name(),
+            'user' => $script->sshAs,
+            'options' => $options,
+            'script' => (string) $script,
+            'output' => '',
+        ])->runInBackground();
+    }
+
+    public function sshKeyPath(): string
+    {
+        return $this->team->privateKeyPath();
+    }
+
+    public function ipAddress(): string
+    {
+        return $this->public_ip;
+    }
+
+    public function port(): int
+    {
+        return 22;
     }
 }
