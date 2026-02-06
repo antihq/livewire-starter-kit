@@ -49,6 +49,10 @@ Route::middleware(['auth'])->group(function () {
     Route::livewire('servers/{server}/cronjobs', 'pages::servers.cronjobs.index')->name('servers.cronjobs.index');
     Route::livewire('cronjobs/{cronjob}/edit', 'pages::cronjobs.edit')->name('cronjobs.edit');
 
+    Route::livewire('servers/{server}/backups/create', 'pages::servers.backups.create')->name('servers.backups.create');
+    Route::livewire('servers/{server}/backups', 'pages::servers.backups.index')->name('servers.backups.index');
+    Route::livewire('backups/{backup}/edit', 'pages::backups.edit')->name('backups.edit');
+
     Route::livewire('servers/{server}/daemons/create', 'pages::servers.daemons.create')->name('servers.daemons.create');
     Route::livewire('servers/{server}/daemons', 'pages::servers.daemons.index')->name('servers.daemons.index');
     Route::livewire('daemons/{daemon}/edit', 'pages::daemons.edit')->name('daemons.edit');

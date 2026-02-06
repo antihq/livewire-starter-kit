@@ -37,4 +37,9 @@ class Database extends Model
     {
         return $this->belongsToMany(DatabaseUser::class, 'database_user');
     }
+
+    public function backups(): BelongsToMany
+    {
+        return $this->belongsToMany(Backup::class, 'backup_database');
+    }
 }

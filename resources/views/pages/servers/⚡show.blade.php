@@ -105,6 +105,11 @@ new class extends Component
     </div>
 
     <div class="flex items-center justify-between">
+        <flux:heading size="md">Backups</flux:heading>
+        <flux:button :href="route('servers.backups.index', $server->id)" variant="ghost" wire:navigate>View Backups ({{ $server->backups->count() }})</flux:button>
+    </div>
+
+    <div class="flex items-center justify-between">
         <flux:heading size="md">Firewall Rules</flux:heading>
         <flux:button :href="route('servers.firewall-rules.index', $server->id)" variant="ghost" wire:navigate>View Firewall Rules ({{ $server->firewallRules->count() }})</flux:button>
     </div>
