@@ -26,6 +26,10 @@ new class extends Component
 ?>
 
 <div class="mx-auto max-w-lg space-y-8">
+    @if ($server->status === 'pending')
+        <flux:badge variant="warning" color="amber">Provisioning Required</flux:badge>
+    @endif
+
     <div class="flex items-center justify-between">
         <flux:heading size="lg">{{ $server->name }}</flux:heading>
         <div class="flex gap-2">
@@ -38,6 +42,14 @@ new class extends Component
             </flux:button>
         </div>
     </div>
+
+    @if ($server->status === 'pending')
+        <div class="rounded-lg border border-amber-200 bg-amber-50 p-4">
+            <flux:heading size="md" class="mb-4">Provision Server</flux:heading>
+            <flux:text class="mb-4 text-sm">Run this command as root on your server to authorize Fuse to manage it:</flux:text>
+            <flux:text class="font-mono text-sm break-all">{{ $server->provisionCommand() }}</flux:text>
+        </div>
+    @endif
 
     <flux:heading size="md">Server Details</flux:heading>
 

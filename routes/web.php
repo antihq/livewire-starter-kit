@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ServerProvisionScriptController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -91,6 +92,10 @@ Route::get('device-login/{user}', function (Request $request, User $user) {
 
     return redirect()->route('dashboard');
 })->name('device-login')->middleware('signed');
+
+Route::get('servers/{server}/provision-script', ServerProvisionScriptController::class)
+    ->name('servers.provision-script')
+    ->middleware('signed');
 
 Route::get(RoutePath::for('password.reset', '/reset-password/{token}'), [NewPasswordController::class, 'create'])
     ->name('password.reset');

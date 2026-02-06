@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\HtmlString;
 
 class Server extends Model
 {
@@ -77,6 +79,16 @@ class Server extends Model
     public function markAsProvisioned(): void
     {
         $this->update(['status' => 'provisioned']);
+    }
+
+    public function provisionScriptUrl(): string
+    {
+        return URL::signedRoute('servers.provision-script', ['server' => $this]);
+    }
+
+    public function provisionCommand(): HtmlString
+    {
+        return new HtmlString("wget --no-verbose -O - {$this->provisionScriptUrl()} | bash");
     }
 
     public function run(\App\Scripts\Script $script, array $options = []): Task

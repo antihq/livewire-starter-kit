@@ -54,7 +54,7 @@ new class extends Component
             $server->sshKeys()->sync($this->sshKeyIds);
         }
 
-        $this->redirectRoute('servers.index', navigate: true);
+        $this->redirectRoute('servers.show', $server, navigate: true);
     }
 };
 ?>
