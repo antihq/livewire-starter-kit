@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use App\Support\InteractsWithSsh;
-use App\Support\Prunable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Task extends Model
 {
-    use HasFactory, InteractsWithSsh, Prunable;
+    use HasFactory, InteractsWithSsh, MassPrunable;
 
     const DEFAULT_TIMEOUT = 3600;
 
@@ -47,6 +48,11 @@ class Task extends Model
     public function server(): BelongsTo
     {
         return $this->belongsTo(Server::class);
+    }
+
+    public function prunable(): Builder
+    {
+        return static::where('created_at', '<=', now()->subDays(21));
     }
 
     public function successful(): bool

@@ -3,6 +3,7 @@
 use App\Models\Server;
 use App\Models\Task;
 use App\Models\Team;
+use Illuminate\Support\Facades\Artisan;
 
 it('can create a task', function () {
     $task = Task::factory()->create();
@@ -55,7 +56,7 @@ it('prunes old tasks', function () {
     Task::factory()->create(['created_at' => now()->subDays(22)]);
     $recent = Task::factory()->create(['created_at' => now()->subDays(20)]);
 
-    Task::prune(now()->subDays(21));
+    Artisan::call('model:prune');
 
     expect(Task::count())->toBe(1)
         ->and(Task::first()->id)->toBe($recent->id);
