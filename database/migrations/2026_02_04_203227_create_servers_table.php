@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('public_ip');
             $table->string('status', 25)->default('pending')->after('public_ip');
+            $table->timestamp('provisioning_job_dispatched_at')->nullable();
             $table->timestamps();
         });
     }

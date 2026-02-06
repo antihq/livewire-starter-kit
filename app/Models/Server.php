@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Callbacks\MarkAsProvisioned;
+use App\Jobs\ProvisionServer;
+use App\Scripts\ProvisionServer as ProvisionServerScript;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,6 +22,7 @@ class Server extends Model
         'public_ip',
         'status',
         'creator_id',
+        'provisioning_job_dispatched_at',
     ];
 
     public function team(): BelongsTo
@@ -130,5 +134,62 @@ class Server extends Model
     public function port(): int
     {
         return 22;
+    }
+
+    public function provision(): void
+    {
+        ProvisionServer::dispatch($this);
+
+        $this->update(['provisioning_job_dispatched_at' => now()]);
+    }
+
+    public function runProvisioningScript(): ?Task
+    {
+        if (! $this->isProvisioning()) {
+            $this->markAsProvisioning();
+
+            return $this->runInBackground($this->provisioningScript(), [
+                'then' => [
+                    MarkAsProvisioned::class,
+                ],
+            ]);
+        }
+
+        return null;
+    }
+
+    public function isReadyForProvisioning(): bool
+    {
+        return (bool) $this->public_ip;
+    }
+
+    public function isProvisioning(): bool
+    {
+        return $this->status === 'provisioning';
+    }
+
+    public function isProvisioned(): bool
+    {
+        return $this->status === 'provisioned';
+    }
+
+    public function markAsProvisioning(): self
+    {
+        return tap($this)->update(['status' => 'provisioning']);
+    }
+
+    public function provisioningJobDispatched(): bool
+    {
+        return ! is_null($this->provisioning_job_dispatched_at);
+    }
+
+    public function provisioningScript(): ProvisionServerScript
+    {
+        return new ProvisionServerScript($this);
+    }
+
+    public function olderThan(int $minutes, string $attribute = 'created_at'): bool
+    {
+        return $this->{$attribute}->lte(now()->subMinutes($minutes));
     }
 }
