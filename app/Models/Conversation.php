@@ -16,6 +16,7 @@ class Conversation extends Model
         'listing_id',
         'user_id',
         'listing_creator_id',
+        'marketplace_id',
     ];
 
     public function listing(): BelongsTo
@@ -36,6 +37,11 @@ class Conversation extends Model
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
+    }
+
+    public function marketplace(): BelongsTo
+    {
+        return $this->belongsTo(Marketplace::class);
     }
 
     public function messages(): HasMany

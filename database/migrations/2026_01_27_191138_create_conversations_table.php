@@ -14,6 +14,7 @@ return new class extends Migration
             $table->foreignId('listing_id')->index();
             $table->foreignId('user_id')->index();
             $table->foreignId('listing_creator_id')->index();
+            $table->foreignId('marketplace_id')->index();
             $table->timestamps();
         });
     }

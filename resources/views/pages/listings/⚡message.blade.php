@@ -38,6 +38,7 @@ new #[Layout('layouts.marketplace')] class extends Component
             [
                 'team_id' => $this->listing->team_id,
                 'listing_creator_id' => $this->listing->creator_id,
+                'marketplace_id' => $this->listing->marketplace_id,
             ]
         );
 
