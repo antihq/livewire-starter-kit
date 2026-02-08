@@ -44,6 +44,7 @@ new #[Layout('layouts.marketplace')] class extends Component
         $message = $conversation->messages()->create([
             'user_id' => Auth::id(),
             'team_id' => $conversation->team_id,
+            'marketplace_id' => $this->listing->marketplace_id,
             'content' => $this->content,
         ]);
 

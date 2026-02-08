@@ -33,6 +33,7 @@ it('creates conversation and message on submit', function () {
 
     expect($listing->fresh()->conversations)->toHaveCount(1);
     expect($listing->conversationWith($user)->messages)->toHaveCount(1);
+    expect($listing->conversationWith($user)->messages->first()->marketplace_id)->toBe($marketplace->id);
 
     Notification::assertSentTo($creator, \App\Notifications\NewMessageNotification::class);
 });
@@ -67,4 +68,5 @@ it('reuses existing conversation', function () {
 
     expect($listing->fresh()->conversations)->toHaveCount(1);
     expect($conversation->fresh()->messages)->toHaveCount(1);
+    expect($conversation->fresh()->messages->first()->marketplace_id)->toBe($marketplace->id);
 });
