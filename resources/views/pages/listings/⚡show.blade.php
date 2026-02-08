@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Listing;
-use App\Models\Marketplace;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
