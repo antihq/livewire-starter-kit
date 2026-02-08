@@ -4,9 +4,10 @@ use App\Models\Listing;
 use App\Models\Marketplace;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-new class extends Component
+new #[Layout('layouts.marketplace')] class extends Component
 {
     public Marketplace $marketplace;
 

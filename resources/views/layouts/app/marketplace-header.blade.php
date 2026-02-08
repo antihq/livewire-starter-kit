@@ -10,15 +10,31 @@
         <flux:header>
             <flux:sidebar.toggle class="lg:hidden" icon="bars-2" />
 
-            <flux:navbar class="max-lg:hidden">
-                <flux:navbar.item :href="route('marketplaces.index')" :current="request()->routeIs('marketplaces.index')" wire:navigate>
-                    Marketplaces
-                </flux:navbar.item>
-            </flux:navbar>
+            <flux:brand :href="route('marketplaces.show', $marketplace)" :name="$marketplace->name" />
 
             <flux:spacer />
 
-            <livewire:profile-dropdown />
+            <flux:navbar class="me-4">
+                <flux:navbar.item :href="route('marketplaces.listings.create', $marketplace)" wire:navigate>
+                    Post a new listing
+                </flux:navbar.item>
+                @guest
+                    <flux:navbar.item :href="route('teams.join', $marketplace->team)" wire:navigate>
+                        Signup
+                    </flux:navbar.item>
+                    <flux:navbar.item :href="route('teams.join', $marketplace->team)" wire:navigate>
+                        Login
+                    </flux:navbar.item>
+                @else
+                    <flux:navbar.item :href="route('dashboard')" wire:navigate>
+                        Inbox
+                    </flux:navbar.item>
+                @endguest
+            </flux:navbar>
+
+            @auth
+                <livewire:profile-dropdown />
+            @endauth
         </flux:header>
 
         <!-- Mobile Menu -->

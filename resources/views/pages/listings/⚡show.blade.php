@@ -1,17 +1,23 @@
 <?php
 
 use App\Models\Listing;
+use App\Models\Marketplace;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-new class extends Component
+new #[Layout('layouts.marketplace')] class extends Component
 {
     public Listing $listing;
 
     public function mount()
     {
         $this->authorize('view', $this->listing);
+
+        request()->merge([
+            'marketplace' => $this->listing->marketplace,
+        ]);
     }
 
     #[Computed]

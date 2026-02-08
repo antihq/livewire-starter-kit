@@ -26,32 +26,21 @@ new class extends Component
 };
 ?>
 
-<flux:header {{ $attributes }}>
-    <flux:sidebar.toggle class="lg:hidden" icon="bars-2" />
-
-    <flux:navbar class="max-lg:hidden">
-        <flux:navbar.item :href="route('marketplaces.index')" :current="request()->routeIs('marketplaces.index')" wire:navigate>
-            Marketplaces
-        </flux:navbar.item>
-    </flux:navbar>
-
-    <flux:spacer />
-
-    <!-- Desktop User Menu -->
-    <flux:dropdown position="top" align="end">
-        <flux:profile class="cursor-pointer" :chevron="false">
-            <x-slot:avatar>
-                @if (auth()->user()->profile_photo_path)
-                    <flux:avatar :src="auth()->user()->profile_photo_url" size="xs" circle />
-                @else
-                    <x-boring-avatar
-                        :name="auth()->user()->name ?? auth()->user()->email"
-                        variant="beam"
-                        class="[:where(&)]:size-7 sm:[:where(&)]:size-6"
-                    />
-                @endif
-            </x-slot>
-        </flux:profile>
+<!-- Desktop User Menu -->
+<flux:dropdown position="top" align="end" {{ $attributes }}>
+    <flux:profile class="cursor-pointer" :chevron="false">
+        <x-slot:avatar>
+            @if (auth()->user()->profile_photo_path)
+                <flux:avatar :src="auth()->user()->profile_photo_url" size="xs" circle />
+            @else
+                <x-boring-avatar
+                    :name="auth()->user()->name ?? auth()->user()->email"
+                    variant="beam"
+                    class="[:where(&)]:size-7 sm:[:where(&)]:size-6"
+                />
+            @endif
+        </x-slot>
+    </flux:profile>
 
         <flux:menu class="min-w-64">
             <flux:menu.group heading="Account">
@@ -135,5 +124,4 @@ new class extends Component
                 </flux:menu.item>
             </form>
         </flux:menu>
-    </flux:dropdown>
-</flux:header>
+</flux:dropdown>
