@@ -26,7 +26,7 @@
                         Login
                     </flux:navbar.item>
                 @else
-                    <flux:navbar.item :href="route('dashboard')" wire:navigate>
+                    <flux:navbar.item :href="route('marketplaces.conversations.index', $marketplace)" wire:navigate>
                         Inbox
                     </flux:navbar.item>
                 @endguest

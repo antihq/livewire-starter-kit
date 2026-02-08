@@ -1,12 +1,15 @@
 <?php
 
-use App\Models\Conversation;
+use App\Models\Marketplace;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-new class extends Component
+new #[Layout('layouts.marketplace')] class extends Component
 {
+    public Marketplace $marketplace;
+
     public function mount()
     {
         //
@@ -29,10 +32,11 @@ new class extends Component
     {
         $userId = $this->user->id;
 
-        return Conversation::where(function ($query) use ($userId) {
-            $query->where('user_id', $userId)
-                ->orWhere('listing_creator_id', $userId);
-        })
+        return $this->marketplace->conversations()
+            ->where(function ($query) use ($userId) {
+                $query->where('user_id', $userId)
+                    ->orWhere('listing_creator_id', $userId);
+            })
             ->with(['listing', 'user', 'listingCreator', 'messages' => function ($query) {
                 $query->latest()->limit(1);
             }])

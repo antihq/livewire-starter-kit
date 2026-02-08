@@ -66,7 +66,7 @@ new #[Layout('layouts.marketplace')] class extends Component
             <div class="flex gap-4">
                     @if ($this->user)
                         @if ($this->user->id === $listing->creator_id)
-                            <flux:button href="{{ route('conversations.index') }}" wire:navigate>
+                            <flux:button href="{{ route('marketplaces.conversations.index', $listing->marketplace) }}" wire:navigate>
                                 View conversations
                             </flux:button>
                     @else

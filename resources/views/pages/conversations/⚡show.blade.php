@@ -5,9 +5,10 @@ use App\Notifications\NewMessageNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-new class extends Component
+new #[Layout('layouts.marketplace')] class extends Component
 {
     public Conversation $conversation;
 
@@ -18,6 +19,11 @@ new class extends Component
         $this->conversation = $conversation->load(['messages.user', 'listing.creator']);
 
         $this->authorize('view', $this->conversation);
+
+        request()->merge([
+            'marketplace' => $this->conversation->marketplace,
+        ]);
+
     }
 
     public function send()
@@ -63,7 +69,7 @@ new class extends Component
 
 <section class="mx-auto max-w-4xl space-y-8">
     <div class="flex items-center gap-4">
-        <flux:button href="{{ route('conversations.index') }}" wire:navigate variant="ghost">
+        <flux:button href="{{ route('marketplaces.conversations.index', $conversation->listing->marketplace) }}" wire:navigate variant="ghost">
             Back
         </flux:button>
         <flux:heading size="xl">Conversation about {{ $conversation->listing->title }}</flux:heading>
