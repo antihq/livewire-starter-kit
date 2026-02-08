@@ -14,7 +14,6 @@ class Message extends Model
         'conversation_id',
         'user_id',
         'team_id',
-        'marketplace_id',
         'content',
     ];
 
@@ -31,10 +30,5 @@ class Message extends Model
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
-    }
-
-    public function marketplace(): BelongsTo
-    {
-        return $this->belongsTo(Marketplace::class);
     }
 }

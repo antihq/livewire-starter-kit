@@ -13,7 +13,6 @@ return new class extends Migration
             $table->foreignId('conversation_id')->index();
             $table->foreignId('user_id')->index();
             $table->foreignId('team_id')->index();
-            $table->foreignId('marketplace_id')->index();
             $table->text('content');
             $table->timestamps();
         });
