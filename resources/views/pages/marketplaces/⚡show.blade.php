@@ -2,16 +2,12 @@
 
 use App\Models\Marketplace;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-new class extends Component
+new #[Layout('layouts.marketplace')] class extends Component
 {
     public Marketplace $marketplace;
-
-    public function mount()
-    {
-        $this->authorize('view', $this->marketplace);
-    }
 
     #[Computed]
     public function listings()
@@ -20,6 +16,8 @@ new class extends Component
     }
 };
 ?>
+
+<x-slot name="title">{{ $marketplace->name }}</x-slot>
 
 <section class="mx-auto max-w-lg">
     @if ($this->listings->count() === 0)

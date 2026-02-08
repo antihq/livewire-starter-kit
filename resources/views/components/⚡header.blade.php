@@ -30,8 +30,8 @@ new class extends Component
     <flux:sidebar.toggle class="lg:hidden" icon="bars-2" />
 
     <flux:navbar class="max-lg:hidden">
-        <flux:navbar.item :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-            Dashboard
+        <flux:navbar.item :href="route('marketplaces.index')" :current="request()->routeIs('marketplaces.index')" wire:navigate>
+            Marketplaces
         </flux:navbar.item>
     </flux:navbar>
 

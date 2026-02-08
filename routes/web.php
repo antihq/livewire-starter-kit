@@ -17,7 +17,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::redirect('dashboard', 'marketplaces')->name('dashboard');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -28,7 +28,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::livewire('marketplaces', 'pages::marketplaces.index')->name('marketplaces.index');
     Route::livewire('marketplaces/create', 'pages::marketplaces.create')->name('marketplaces.create');
-    Route::livewire('marketplaces/{marketplace}', 'pages::marketplaces.show')->name('marketplaces.show');
     Route::livewire('marketplaces/{marketplace}/listings/create', 'pages::marketplaces.listings.create')->name('marketplaces.listings.create');
     Route::livewire('listings/{listing}', 'pages::listings.show')->name('listings.show');
     Route::livewire('listings/{listing}/message', 'pages::listings.message')->name('listings.message');
@@ -55,6 +54,8 @@ Route::middleware(['auth'])->group(function () {
         )
         ->name('two-factor.show');
 });
+
+Route::livewire('marketplaces/{marketplace}', 'pages::marketplaces.show')->name('marketplaces.show');
 
 Route::get('device-login/{user}', function (Request $request, User $user) {
     if (! $request->hasValidSignature()) {
