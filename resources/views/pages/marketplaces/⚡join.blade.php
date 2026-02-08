@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Marketplace;
 use App\Models\Team;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Jetstream\Events\AddingTeamMember;
@@ -9,7 +10,19 @@ use Livewire\Component;
 
 new class extends Component
 {
-    public Team $team;
+    public Marketplace $marketplace;
+
+    #[Computed]
+    public function user()
+    {
+        return Auth::user();
+    }
+
+    #[Computed]
+    public function team()
+    {
+        return $this->marketplace->team;
+    }
 
     public function join()
     {
@@ -33,12 +46,6 @@ new class extends Component
 
         return $this->redirectRoute('dashboard');
     }
-
-    #[Computed]
-    public function user()
-    {
-        return Auth::user();
-    }
 };
 ?>
 
@@ -47,14 +54,14 @@ new class extends Component
 
     <div class="space-y-6">
         <header class="space-y-1">
-            <flux:heading size="lg">{{ $team->name }}</flux:heading>
+            <flux:heading size="lg">{{ $this->team->name }}</flux:heading>
             <flux:text>You've been invited to join this team.</flux:text>
         </header>
 
-        @if ($team->hasUser($this->user))
+        @if ($this->team->hasUser($this->user))
             <flux:text variant="subtle">You are already a member of this team.</flux:text>
             <flux:button href="{{ route('dashboard') }}" variant="subtle">Go to dashboard</flux:button>
-        @elseif ($this->user->ownsTeam($team))
+        @elseif ($this->user->ownsTeam($this->team))
             <flux:text variant="subtle">You cannot join your own team.</flux:text>
             <flux:button href="{{ route('dashboard') }}" variant="subtle">Go to dashboard</flux:button>
         @else

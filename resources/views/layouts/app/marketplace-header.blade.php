@@ -19,10 +19,10 @@
                     Post a new listing
                 </flux:navbar.item>
                 @guest
-                    <flux:navbar.item :href="route('teams.join', $marketplace->team)" wire:navigate>
+                    <flux:navbar.item :href="route('marketplaces.join', ['marketplace' => $marketplace, 'register' => true])" wire:navigate>
                         Signup
                     </flux:navbar.item>
-                    <flux:navbar.item :href="route('teams.join', $marketplace->team)" wire:navigate>
+                    <flux:navbar.item :href="route('marketplaces.join', $marketplace)" wire:navigate>
                         Login
                     </flux:navbar.item>
                 @else

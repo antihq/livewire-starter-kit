@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Marketplace;
 use App\Models\User;
 use Livewire\Livewire;
 
@@ -11,10 +12,11 @@ it('allows users to join a team they do not belong to', function () {
 
     $owner = User::factory()->withPersonalTeam()->create();
     $team = $owner->currentTeam;
+    $marketplace = Marketplace::factory()->for($team)->create();
 
-    get(route('teams.join', $team));
+    get(route('marketplaces.join', $marketplace));
 
-    Livewire::test('pages::teams.join', ['team' => $team])
+    Livewire::test('pages::marketplaces.join', ['marketplace' => $marketplace])
         ->call('join')
         ->assertHasNoErrors();
 
@@ -24,8 +26,9 @@ it('allows users to join a team they do not belong to', function () {
 it('prevents users from joining their own team', function () {
     actingAs($user = User::factory()->withPersonalTeam()->create());
     $team = $user->currentTeam;
+    $marketplace = Marketplace::factory()->for($team)->create();
 
-    Livewire::test('pages::teams.join', ['team' => $team])
+    Livewire::test('pages::marketplaces.join', ['marketplace' => $marketplace])
         ->call('join')
         ->assertHasErrors(['team']);
 
@@ -35,13 +38,14 @@ it('prevents users from joining their own team', function () {
 it('prevents users from joining a team they are already a member of', function () {
     $owner = User::factory()->withPersonalTeam()->create();
     $team = $owner->currentTeam;
+    $marketplace = Marketplace::factory()->for($team)->create();
 
     $user = User::factory()->create();
     $team->users()->attach($user, ['role' => 'admin']);
 
     actingAs($user);
 
-    Livewire::test('pages::teams.join', ['team' => $team])
+    Livewire::test('pages::marketplaces.join', ['marketplace' => $marketplace])
         ->call('join')
         ->assertHasErrors(['team']);
 

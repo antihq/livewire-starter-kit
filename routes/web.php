@@ -23,12 +23,12 @@ Route::middleware([
 Route::middleware(['auth'])->group(function () {
     Route::livewire('teams/create', 'pages::teams.create')->name('teams.create');
     Route::livewire('teams/{team}', 'pages::teams.show')->name('teams.edit');
-    Route::livewire('teams/{team}/join', 'pages::teams.join')->name('teams.join');
     Route::livewire('teams/{team}/members', 'pages::teams.members.index')->name('teams.members.index');
 
     Route::livewire('marketplaces', 'pages::marketplaces.index')->name('marketplaces.index');
     Route::livewire('marketplaces/create', 'pages::marketplaces.create')->name('marketplaces.create');
     Route::livewire('marketplaces/{marketplace}/listings/create', 'pages::marketplaces.listings.create')->name('marketplaces.listings.create');
+    Route::livewire('marketplaces/{marketplace}/join', 'pages::marketplaces.join')->name('marketplaces.join');
     Route::livewire('listings/{listing}', 'pages::listings.show')->name('listings.show');
     Route::livewire('listings/{listing}/message', 'pages::listings.message')->name('listings.message');
     Route::livewire('listings/{listing}/conversation', 'pages::listings.conversation')->name('listings.conversation');
