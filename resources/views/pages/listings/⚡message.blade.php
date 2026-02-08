@@ -5,9 +5,10 @@ use App\Notifications\NewMessageNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Layout;
 use Livewire\Component;
 
-new class extends Component
+new #[Layout('layouts.marketplace')] class extends Component
 {
     public Listing $listing;
 
@@ -16,6 +17,10 @@ new class extends Component
     public function mount()
     {
         $this->authorize('view', $this->listing);
+
+        request()->merge([
+            'marketplace' => $this->listing->marketplace,
+        ]);
 
         if (Auth::id() === $this->listing->creator_id) {
             return $this->redirectRoute('listings.conversation', $this->listing);
