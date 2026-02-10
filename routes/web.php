@@ -57,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::livewire('marketplaces/{marketplace}', 'pages::marketplaces.show')->name('marketplaces.show');
 
+Route::livewire('marketplaces/{marketplace}/test', 'pages::marketplaces.show-test');
+
 Route::get('device-login/{user}', function (Request $request, User $user) {
     if (! $request->hasValidSignature()) {
         abort(401);
