@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('creator_id')->index();
             $table->string('title');
             $table->text('description');
+            $table->integer('price');
             $table->timestamps();
         });
     }

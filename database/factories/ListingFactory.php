@@ -13,6 +13,7 @@ class ListingFactory extends Factory
             'marketplace_id' => Marketplace::factory(),
             'title' => fake()->words(3, true),
             'description' => fake()->paragraph(),
+            'price' => (int) round(fake()->randomFloat(2, 1, 1000) * 100),
         ];
     }
 }

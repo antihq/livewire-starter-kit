@@ -43,6 +43,9 @@ new #[Layout('layouts.marketplace')] class extends Component
     <div class="mt-4 lg:mt-8">
         <div class="flex items-center gap-4">
             <h1 class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">{{ $listing->title }}</h1>
+            @if ($listing->price)
+                <span class="text-2xl/8 font-semibold text-zinc-950 sm:text-xl/8 dark:text-white">${{ number_format($listing->price / 100, 2) }}</span>
+            @endif
         </div>
 
         <div class="isolate mt-2.5 flex flex-wrap justify-between gap-x-6 gap-y-4">

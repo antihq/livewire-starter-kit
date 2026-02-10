@@ -19,6 +19,7 @@ it('can create listings', function () {
     Livewire::test('pages::marketplaces.listings.create', ['marketplace' => $marketplace])
         ->set('title', 'Test Listing')
         ->set('description', 'This is a test description')
+        ->set('price', '99.99')
         ->call('create')
         ->assertHasNoErrors();
 
