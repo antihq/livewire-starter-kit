@@ -6,18 +6,36 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Spatie\LivewireFilepond\WithFilePond;
 
 new #[Layout('layouts.marketplace')] class extends Component
 {
+    use WithFilePond;
+
     public Marketplace $marketplace;
 
     public $title = '';
 
     public $description = '';
 
+    public $file;
+
     public function mount()
     {
         $this->authorize('view', $this->marketplace);
+    }
+
+    public function rules(): array
+    {
+        return [
+            'file' => 'required|mimetypes:image/jpg,image/jpeg,image/png|max:12000',
+        ];
+    }
+    public function validateUploadedFile()
+    {
+        $this->validate();
+
+        return true;
     }
 
     public function create()
@@ -59,11 +77,14 @@ new #[Layout('layouts.marketplace')] class extends Component
     <div class="mt-14 space-y-14">
         <form wire:submit="create" class="w-full max-w-lg space-y-8">
             <flux:input wire:model="title" label="Listing title" type="text" required autofocus />
-            <flux:textarea wire:model="description" label="Description" required />
+            <flux:editor wire:model="description" label="Description" toolbar="bold italic bullet ordered | link | align" required />
+            <x-filepond::upload wire:model="file" multiple required />
             <div class="flex justify-end gap-4">
                 <flux:button href="{{ route('marketplaces.show', $marketplace) }}" variant="ghost" wire:navigate>Cancel</flux:button>
                 <flux:button variant="primary" type="submit">Publish listing</flux:button>
             </div>
         </form>
     </div>
+
+    @filepondScripts
 </section>
