@@ -19,7 +19,7 @@ beforeEach(function () {
 });
 
 it('renders successfully', function () {
-    $user = User::factory()->withPersonalTeam()->withoutTwoFactor()->create();
+    $user = User::factory()->withPersonalTeam()->create();
 
     Auth::login($user);
 
@@ -28,7 +28,7 @@ it('renders successfully', function () {
 });
 
 it('two factor settings page can be rendered', function () {
-    $user = User::factory()->withPersonalTeam()->withoutTwoFactor()->create();
+    $user = User::factory()->withPersonalTeam()->create();
 
     actingAs($user)
         ->withSession(['auth.password_confirmed_at' => time()])

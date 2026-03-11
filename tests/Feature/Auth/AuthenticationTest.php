@@ -16,7 +16,7 @@ it('can render login screen', function () {
 });
 
 it('can authenticate using the login screen', function () {
-    $user = User::factory()->withoutTwoFactor()->create();
+    $user = User::factory()->create();
 
     $response = post(route('login.store'), [
         'email' => $user->email,
@@ -52,7 +52,7 @@ it('redirects to two factor challenge when two factor is enabled', function () {
         'confirmPassword' => true,
     ]);
 
-    $user = User::factory()->create();
+    $user = User::factory()->withTwoFactor()->create();
 
     $response = post(route('login.store'), [
         'email' => $user->email,

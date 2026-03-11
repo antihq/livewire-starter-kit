@@ -21,8 +21,9 @@
         "lightningcss-linux-x64-gnu": "^1.29.1"
     },
     "devDependencies": {
-        "prettier": "^3.7.4",
-        "prettier-plugin-blade": "^2.1.21",
+        "@prettier/plugin-php": "^0.24.0",
+        "prettier": "^3.8.1",
+        "prettier-plugin-blade": "^3.0.0",
         "prettier-plugin-tailwindcss": "^0.7.2"
     }
 }

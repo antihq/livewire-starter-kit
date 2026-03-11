@@ -26,7 +26,7 @@ it('can render two factor challenge', function () {
         'confirmPassword' => true,
     ]);
 
-    $user = User::factory()->create();
+    $user = User::factory()->withTwoFactor()->create();
 
     post(route('login.store'), [
         'email' => $user->email,

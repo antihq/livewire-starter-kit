@@ -18,9 +18,4 @@ return new class extends Migration
             $table->unique(['team_id', 'email']);
         });
     }
-
-    public function down(): void
-    {
-        Schema::dropIfExists('team_invitations');
-    }
 };

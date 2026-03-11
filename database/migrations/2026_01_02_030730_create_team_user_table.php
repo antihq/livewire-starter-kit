@@ -18,9 +18,4 @@ return new class extends Migration
             $table->unique(['team_id', 'user_id']);
         });
     }
-
-    public function down(): void
-    {
-        Schema::dropIfExists('team_user');
-    }
 };
